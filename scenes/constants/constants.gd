@@ -2,7 +2,7 @@ extends Node
 
 # World Size
 const SURFACE_HEIGHT := 10;
-const MAX_GEN_DEPTH := 1000;
+const MAX_GEN_DEPTH := 100;
 const MAX_WORLD_WIDTH := 20;
 const TILE_WIDTH := 16
 

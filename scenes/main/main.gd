@@ -1,8 +1,7 @@
 extends Node2D
 
 func _ready():
-  # make the skybox match the width of the generated world
-  $Sky.size.x = Constants.MAX_WORLD_WIDTH * Constants.TILE_WIDTH
+  pass
 
 func test_image():
   var image = GenUtils.get_noise().get_image(Constants.MAX_WORLD_WIDTH, 20)

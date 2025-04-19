@@ -29,7 +29,7 @@ var jetpack_accel_penalty = 0.1
 # max upward speed
 var jetpack_speed_limit = 175.0
 # gas tank size (in mL)
-var fuel_capacity = 3000.0
+var fuel_capacity = 1000.0
 # how much fuel the jetpack consumes (in mL per physics frame)
 var jetpack_fuel_efficiency = 5.0
 ## Digging
