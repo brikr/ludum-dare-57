@@ -92,6 +92,9 @@ func gen_map():
 func global_position_to_map_coords(global_pos: Vector2):
   return Vector2i(global_pos / Constants.TILE_WIDTH)
 
+func map_coords_to_global_position(map_coords: Vector2i):
+  return Vector2(map_coords * Constants.TILE_WIDTH)
+
 func dig(coords: Vector2i):
   if map[coords].is_diggable():
     map[coords].clear()
