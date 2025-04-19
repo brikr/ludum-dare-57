@@ -35,7 +35,7 @@ var jetpack_fuel_efficiency = 5.0
 ## Digging
 # digging power (per physics frame)
 # TODO: this should be 1.0 for real digging to return
-var digging_power = 100.0
+var digging_power = 1.0
 ## Falling
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
