@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfowoevuj1o11"]
+
+[ext_resource type="Theme" uid="uid://dmwt5ilifg3r8" path="res://scenes/ui_theme.tres" id="1_48c2t"]
+[ext_resource type="Script" uid="uid://c57mj3ygc5bdo" path="res://scenes/hud/hud.gd" id="1_cgeww"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_cgeww")
+
+[node name="Fuel" type="Label" parent="."]
+offset_left = 5.0
+offset_right = 715.0
+offset_bottom = 67.0
+theme = ExtResource("1_48c2t")
+text = "Fuel: 0"
+horizontal_alignment = 2
