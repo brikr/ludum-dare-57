@@ -11,7 +11,7 @@ const AIR_TILE := Vector2i(-1, -1)
 const DIRT_TILE := Vector2i(0, 0)
 const HAZARD_TILE := Vector2i(1, 0)
 const FENCE_TILE := Vector2i(2, 0)
-const EMPTY_DIRT_TILE := Vector2i(1, 0)
+const EMPTY_DIRT_TILE := Vector2i(0, 1)
 const TILE_WIDTH := 16
 
 # Object Tiles

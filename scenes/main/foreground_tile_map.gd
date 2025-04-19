@@ -1,6 +1,7 @@
 extends TileMapLayer
 
 func _ready():
+  GameState.tile_updated.connect(tile_updated)
   # Pull map data from GameState
   # I sure hope GameState did map gen before this...
   for coords in GameState.map:
@@ -14,6 +15,9 @@ func _process(_delta: float):
 
 func highlight_cell(cell_position: Vector2i):
   $HighlightedTile.position = map_to_local(cell_position)
+  
+func tile_updated(tile: Tile):
+  set_cell(tile.coords, Constants.SOURCE_ID, get_tile_set_tile(tile))
 
 func get_tile_set_tile(tile: Tile):
   match tile.type:
