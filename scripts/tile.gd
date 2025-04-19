@@ -22,6 +22,12 @@ func is_diggable():
 func difficulty():
   return Constants.TILE_DIFFICULTY.get(type, 0.0) + Constants.OBJECT_DIFFICULTY.get(objectType, 0.0)
 
+func weight():
+  return Constants.OBJECT_WEIGHT.get(objectType, 0.0)
+
+func value():
+  return Constants.OBJECT_VALUE.get(objectType, 0.0)
+
 func clear():
   type = TileType.EMPTY
   objectType = TileObjectType.NONE
