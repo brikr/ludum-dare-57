@@ -18,6 +18,10 @@ func is_above_ground():
 func is_diggable():
   return type == TileType.DIRT
 
+# how much total digging power must be expended to break this tile
+func difficulty():
+  return Constants.TILE_DIFFICULTY.get(type, 0.0) + Constants.OBJECT_DIFFICULTY.get(objectType, 0.0)
+
 func clear():
   type = TileType.EMPTY
   objectType = TileObjectType.NONE
