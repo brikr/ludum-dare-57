@@ -52,3 +52,19 @@ const OBJECT_DIFFICULTY: Dictionary[Tile.TileObjectType, float] = {
   Tile.TileObjectType.ALIEN_SKULL: 150.0,
   Tile.TileObjectType.ALIEN_TECH: 200.0,
 }
+
+# Haul weight (in kg)
+const OBJECT_WEIGHT: Dictionary[Tile.TileObjectType, float] = {
+  Tile.TileObjectType.GOLD: 1.0,
+  Tile.TileObjectType.BLUE: 1.5,
+  Tile.TileObjectType.ALIEN_SKULL: 10.0,
+  Tile.TileObjectType.ALIEN_TECH: 1.0,
+}
+
+# Haul value (in USD)
+const OBJECT_VALUE: Dictionary[Tile.TileObjectType, float] = {
+  Tile.TileObjectType.GOLD: 10.0,
+  Tile.TileObjectType.BLUE: 40.0,
+  Tile.TileObjectType.ALIEN_SKULL: 1000.0,
+  Tile.TileObjectType.ALIEN_TECH: 2000.0,
+}
