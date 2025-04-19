@@ -4,7 +4,7 @@ signal tile_updated
 
 var map: Dictionary[Vector2i, Tile] = {}
 
-func _ready():
+func _ready():  
   gen_map()
 
 ####### WORLD GEN #######
@@ -33,8 +33,9 @@ func gen_over_world():
       var coords := Vector2i(x, y)
       if is_horizontal_edge(x):
         map[coords] = Tile.Border(coords)
-      else:
-        map.erase(coords)
+      else: 
+        map[coords] = Tile.Empty(coords)
+
 
 func gen_map():
   gen_over_world()
@@ -44,5 +45,6 @@ func global_position_to_map_coords(global_pos: Vector2):
   return (global_pos/Constants.TILE_WIDTH).floor()
 
 func dig(coords: Vector2i):
-  map[coords].clear()
-  tile_updated.emit(map[coords])
+  if map[coords].is_diggable():
+    map[coords].clear()
+    tile_updated.emit(map[coords])
