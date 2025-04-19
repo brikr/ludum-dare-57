@@ -58,11 +58,7 @@ var haul_value = 0.0
 var haul_weight = 0.0
 
 func _ready():
-  # set camera limits to generated world
-  $Camera2D.limit_left = 0.0
-  $Camera2D.limit_right = Constants.MAX_WORLD_WIDTH * Constants.TILE_WIDTH
-  $Camera2D.limit_top = 0.0
-  $Camera2D.limit_bottom = Constants.MAX_GEN_DEPTH * Constants.TILE_WIDTH
+  pass
 
 
 func _physics_process(delta):
