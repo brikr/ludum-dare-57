@@ -40,6 +40,9 @@ func gen_map():
   gen_over_world()
   gen_under_world()
 
+func global_position_to_map_coords(global_pos: Vector2):
+  return (global_pos/Constants.TILE_WIDTH).floor()
+
 func dig(coords: Vector2i):
   # TODO: make sure they can dig lol
   map.erase(coords)

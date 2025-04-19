@@ -35,4 +35,4 @@ script = ExtResource("2_k2fmo")
 texture = ExtResource("3_l3cfh")
 
 [node name="Player" parent="." instance=ExtResource("2_iuonh")]
-position = Vector2(23, 79)
+position = Vector2(272, 110)
