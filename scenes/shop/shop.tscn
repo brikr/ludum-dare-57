@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=4 uid="uid://c8fpd8kkkwavg"]
+[gd_scene load_steps=5 format=4 uid="uid://c8fpd8kkkwavg"]
 
 [ext_resource type="TileSet" uid="uid://dj57dgaexk3lc" path="res://assets/tiles.tres" id="1_100s2"]
 [ext_resource type="Script" uid="uid://cu1wcax7qq538" path="res://scenes/shop/shop.gd" id="1_qaxay"]
+[ext_resource type="Texture2D" uid="uid://cygxqa4gj3hyi" path="res://assets/f.png" id="3_7lxhl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_100s2"]
 size = Vector2(65, 33)
@@ -21,4 +22,10 @@ collision_mask = 2
 position = Vector2(59.5, 143.5)
 shape = SubResource("RectangleShape2D_100s2")
 
+[node name="F" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(71, 135)
+texture = ExtResource("3_7lxhl")
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_player_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_player_exited"]
