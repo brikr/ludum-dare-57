@@ -36,4 +36,6 @@ script = ExtResource("2_k2fmo")
 texture = ExtResource("3_l3cfh")
 
 [node name="Player" parent="." instance=ExtResource("2_iuonh")]
-position = Vector2(272, 110)
+position = Vector2(20, 16)
+
+[node name="test" type="Sprite2D" parent="."]

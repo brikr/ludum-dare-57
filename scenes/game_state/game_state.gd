@@ -1,10 +1,11 @@
 extends Node
 
+
 signal tile_updated
 
 var map: Dictionary[Vector2i, Tile] = {}
 
-func _ready():  
+func _ready():
   gen_map()
 
 ####### WORLD GEN #######
@@ -18,6 +19,26 @@ func is_edge(x, y):
   return is_horizontal_edge(x) || is_vertical_edge(y)
 
 func gen_under_world():
+  gen_base_under_world()
+  gen_gold()
+
+
+func gen_gold():
+  var noise = FastNoiseLite.new() # there are a shit load of props you can change
+  noise.noise_type = FastNoiseLite.NoiseType.TYPE_SIMPLEX
+  noise.seed = 69 # kek, funny numbie
+  noise.fractal_octaves = 5
+  noise.fractal_gain = 10
+
+  for x in Constants.MAX_WORLD_WIDTH:
+    for y in Constants.MAX_GEN_DEPTH:
+      y = y + Constants.SURFACE_HEIGHT
+      var coords := Vector2i(x, y)
+      print(noise.get_noise_2dv(coords))
+      if noise.get_noise_2dv(coords) > 0.8:
+        map[coords].type = Tile.TileType.EMPTY
+
+func gen_base_under_world():
   for x in Constants.MAX_WORLD_WIDTH:
     for y in Constants.MAX_GEN_DEPTH:
       y = y + Constants.SURFACE_HEIGHT
@@ -33,7 +54,7 @@ func gen_over_world():
       var coords := Vector2i(x, y)
       if is_horizontal_edge(x):
         map[coords] = Tile.Border(coords)
-      else: 
+      else:
         map[coords] = Tile.Empty(coords)
 
 

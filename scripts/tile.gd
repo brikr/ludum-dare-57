@@ -7,7 +7,7 @@ var coords: Vector2i
 var type: TileType
 var objectType: TileObjectType
 
-func _init(coords, type, objectType = TileObjectType.NONE):
+func _init(coords, type, objectType):
   self.coords = coords
   self.type = type
   self.objectType = objectType
@@ -17,16 +17,16 @@ func is_above_ground():
 
 func is_diggable():
   return type == TileType.DIRT
-  
+
 func clear():
   type = TileType.EMPTY
   objectType = TileObjectType.NONE
 
-static func Dirt(coords):
-  return Tile.new(coords, TileType.DIRT)
+static func Dirt(coords, objectType = TileObjectType.NONE):
+  return Tile.new(coords, TileType.DIRT, objectType)
 
 static func Border(coords):
-  return Tile.new(coords, TileType.BORDER)
+  return Tile.new(coords, TileType.BORDER, TileObjectType.NONE)
 
 static func Empty(coords):
-  return Tile.new(coords, TileType.EMPTY)
+  return Tile.new(coords, TileType.EMPTY, TileObjectType.NONE)
