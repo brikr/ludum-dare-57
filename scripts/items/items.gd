@@ -1,3 +1,5 @@
+extends Node
+
 var GEAR_REGISTRY = [
   Item.new(Item.Type.GEAR, {
       Item.StatImpact.JETPACK_SPEED_LIMIT: 25,
