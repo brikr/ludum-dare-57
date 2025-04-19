@@ -20,23 +20,23 @@ func is_edge(x, y):
 
 func gen_under_world():
   gen_base_under_world()
-  gen_gold()
+  gen_resource(Tile.TileObjectType.GOLD)
+  gen_resource(Tile.TileObjectType.BLUE)
 
-
-func gen_gold():
-  var noise = FastNoiseLite.new() # there are a shit load of props you can change
-  noise.noise_type = FastNoiseLite.NoiseType.TYPE_SIMPLEX
-  noise.seed = 69 # kek, funny numbie
-  noise.fractal_octaves = 5
-  noise.fractal_gain = 10
+func gen_resource(resourceType: Tile.TileObjectType):
+  var noise = GenUtils.get_noise()
+  var min_depth = Constants.WORLD_GEN[resourceType][Constants.WORLD_GEN_FIELDS.MIN_DEPTH]
+  var max_depth = Constants.WORLD_GEN[resourceType][Constants.WORLD_GEN_FIELDS.MAX_DEPTH]
+  var depth_coefficient = Constants.WORLD_GEN[resourceType][Constants.WORLD_GEN_FIELDS.COEFFICIENT]
+  var threashold = Constants.WORLD_GEN[resourceType][Constants.WORLD_GEN_FIELDS.THRESHOLD]
 
   for x in Constants.MAX_WORLD_WIDTH:
-    for y in Constants.MAX_GEN_DEPTH:
-      y = y + Constants.SURFACE_HEIGHT
+    for y in range(Constants.SURFACE_HEIGHT + min_depth, max_depth):
       var coords := Vector2i(x, y)
-      print(noise.get_noise_2dv(coords))
-      if noise.get_noise_2dv(coords) > 0.8 && map[coords].type == Tile.TileType.DIRT:
-        map[coords].objectType = Tile.TileObjectType.GOLD
+      var probability = noise.get_noise_2dv(coords) * y * depth_coefficient
+      if probability > threashold && map[coords].type == Tile.TileType.DIRT:
+        map[coords].objectType = resourceType
+
 
 func gen_base_under_world():
   for x in Constants.MAX_WORLD_WIDTH:
