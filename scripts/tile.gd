@@ -15,6 +15,9 @@ func _init(coords, type, objectType = TileObjectType.NONE):
 func is_above_ground():
   return coords.y < Constants.SURFACE_HEIGHT
 
+func is_diggable():
+  return type == TileType.DIRT
+
 func clear():
   type = TileType.EMPTY
   objectType = TileObjectType.NONE
