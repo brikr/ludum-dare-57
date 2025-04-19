@@ -23,6 +23,8 @@ func gen_under_world():
   gen_base_under_world() # generates dirt and borders
   gen_out_of_bounds() # dirt outside the hazards as far as the eye can see (7 tiles)
 
+  gen_resource(Tile.TileObjectType.ALIEN_SKULL)
+  gen_resource(Tile.TileObjectType.ALIEN_TECH)
   gen_resource(Tile.TileObjectType.BLUE)
   gen_resource(Tile.TileObjectType.GOLD)
 
@@ -42,8 +44,8 @@ func gen_resource(resourceType: Tile.TileObjectType):
       var depth_ratio := float(y - (Constants.SURFACE_HEIGHT + min_depth)) / float(max_depth - (Constants.SURFACE_HEIGHT + min_depth))
       # Sweep coefficient based on depth.
       var depth_coefficient = lerp(min_depth_coefficient, max_depth_coefficient, depth_ratio)
-
-      var probability = noise.get_noise_2dv(coords) * y * depth_coefficient
+      var noise_val = (noise.get_noise_2dv(coords) + 1.0) / 2.0 # between 0.0 and 1
+      var probability = noise_val * depth_coefficient
       if probability > threashold && map[coords].type == Tile.TileType.DIRT:
         map[coords].objectType = resourceType
 
