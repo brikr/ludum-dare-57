@@ -35,7 +35,7 @@ func gen_gold():
       y = y + Constants.SURFACE_HEIGHT
       var coords := Vector2i(x, y)
       print(noise.get_noise_2dv(coords))
-      if noise.get_noise_2dv(coords) > 0.8:
+      if noise.get_noise_2dv(coords) > 0.8 && map[coords].type == Tile.TileType.DIRT:
         map[coords].objectType = Tile.TileObjectType.GOLD
 
 func gen_base_under_world():
