@@ -80,7 +80,14 @@ func _animate_on_ground(velocity: Vector2):
     else:
       $AnimatedSprite2D.animation = "walk_right"
 
+func _apply_item(item: Item) -> void:
+  item.apply_item(self)
+
 func _process_movement(delta):
+  # ainskeep tesing
+  if Input.is_action_just_pressed("secondary_mouse_action"):
+    _apply_item(Item.new(Item.ItemType.GEAR, {Item.StatImpact.ADD_FUEL: 5}))
+
   if is_on_floor():
     # Ground stuff
     # Handle jump

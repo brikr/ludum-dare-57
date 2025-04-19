@@ -43,7 +43,6 @@ func gen_resource(resourceType: Tile.TileObjectType):
       var depth_coefficient = lerp(min_depth_coefficient, max_depth_coefficient, depth_ratio)
 
       var probability = noise.get_noise_2dv(coords) * y * depth_coefficient
-      print(coords, probability)
       if probability > threashold && map[coords].type == Tile.TileType.DIRT:
         map[coords].objectType = resourceType
 
