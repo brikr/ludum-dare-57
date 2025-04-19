@@ -10,7 +10,7 @@ func _ready():
 
 ####### WORLD GEN #######
 func is_vertical_edge(y):
-  return (y == 0 || y == Constants.MAX_GEN_DEPTH - 1 )
+  return (y == 0 || y == Constants.MAX_GEN_DEPTH - 1)
 
 func is_horizontal_edge(x):
   return (x == 0 || x == Constants.MAX_WORLD_WIDTH - 1)
@@ -63,7 +63,7 @@ func gen_map():
   gen_under_world()
 
 func global_position_to_map_coords(global_pos: Vector2):
-  return (global_pos/Constants.TILE_WIDTH).floor()
+  return Vector2i(global_pos / Constants.TILE_WIDTH)
 
 func dig(coords: Vector2i):
   if map[coords].is_diggable():

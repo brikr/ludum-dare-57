@@ -16,12 +16,5 @@ func _ready():
   $test.texture = ImageTexture.create_from_image(image)
 
 func _process(_delta):
-  # Update highlighted tile position
-  var mouse_pos = get_local_mouse_position()
-  $HighlightedTile.position = Vector2(
-    floor(mouse_pos.x / Constants.TILE_WIDTH) * Constants.TILE_WIDTH,
-    floor(mouse_pos.y / Constants.TILE_WIDTH) * Constants.TILE_WIDTH,
-  )
-
   if Input.is_action_just_pressed("ui_cancel"):
     get_tree().quit()

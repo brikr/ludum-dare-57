@@ -19,3 +19,6 @@ const GOLD_TILE := Vector2i(0, 2)
 const BLUE_TILE := Vector2i(1, 2)
 const ALIEN_SKULL_TILE := Vector2i(0, 3)
 const ALIEN_TECH_TILE := Vector2i(1, 3)
+
+# Animation
+const TILE_BREAKING_FRAME_COUNT := 8

@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dbi1s0tx3b5vk"]
+[gd_scene load_steps=9 format=3 uid="uid://dbi1s0tx3b5vk"]
 
 [ext_resource type="Script" uid="uid://bk710nk5wc8ta" path="res://scenes/main/main.gd" id="1_6q06x"]
 [ext_resource type="Texture2D" uid="uid://bu0ricl7ntd50" path="res://assets/tiles.png" id="1_hyk8p"]
 [ext_resource type="PackedScene" uid="uid://eduld2nd3eqw" path="res://scenes/player/player.tscn" id="2_iuonh"]
-[ext_resource type="Texture2D" uid="uid://cwog7sm42684w" path="res://assets/tile_highlight.png" id="3_l3cfh"]
 [ext_resource type="Script" uid="uid://dwukm0d7mmuhx" path="res://scenes/main/tile_map.gd" id="3_ow5a4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iuonh"]
@@ -49,10 +48,6 @@ tile_set = SubResource("TileSet_ow5a4")
 
 [node name="Player" parent="." instance=ExtResource("2_iuonh")]
 position = Vector2(20, 16)
-
-[node name="HighlightedTile" type="Sprite2D" parent="."]
-texture = ExtResource("3_l3cfh")
-centered = false
 
 [node name="test" type="Sprite2D" parent="."]
 position = Vector2(8, 0)
