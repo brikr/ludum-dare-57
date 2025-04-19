@@ -63,11 +63,28 @@ func _ready():
   $Camera2D.limit_right = Constants.MAX_WORLD_WIDTH * Constants.TILE_WIDTH
   $Camera2D.limit_top = 0.0
   $Camera2D.limit_bottom = Constants.MAX_GEN_DEPTH * Constants.TILE_WIDTH
+  $AnimatedSprite2D.play()
 
 
 func _physics_process(delta):
   _process_movement(delta)
   _process_digging(delta)
+
+func _animate_on_ground(velocity: Vector2):
+  if velocity == Vector2(0, 0):
+    $AnimatedSprite2D.speed_scale = 1.0
+    # idle
+    if $AnimatedSprite2D.animation.ends_with("right"):
+      $AnimatedSprite2D.animation = "idle_right"
+    else:
+      $AnimatedSprite2D.animation = "idle_left"
+
+  else:
+    $AnimatedSprite2D.speed_scale = 10.0
+    if velocity.x < 0:
+      $AnimatedSprite2D.animation = "walk_left"
+    else:
+      $AnimatedSprite2D.animation = "walk_right"
 
 func _process_movement(delta):
   if is_on_floor():
@@ -83,6 +100,8 @@ func _process_movement(delta):
       velocity.x = move_toward(velocity.x, move_direction * speed, accel)
     else:
       velocity.x = move_toward(velocity.x, 0, accel)
+
+    _animate_on_ground(velocity)
   else:
     # Air stuff
     # Apply gravity
