@@ -12,8 +12,9 @@ func _process(delta):
 
 func _on_player_entered(body: Node2D) -> void:
   player_present = true
-  $F.visible = true
+  $FGlyph.visible = true
+  $FGlyph.play()
 
 func _on_player_exited(body: Node2D) -> void:
   player_present = false
-  $F.visible = false
+  $FGlyph.visible = false

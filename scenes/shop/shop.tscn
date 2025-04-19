@@ -1,11 +1,44 @@
-[gd_scene load_steps=5 format=4 uid="uid://c8fpd8kkkwavg"]
+[gd_scene load_steps=10 format=4 uid="uid://c8fpd8kkkwavg"]
 
 [ext_resource type="TileSet" uid="uid://dj57dgaexk3lc" path="res://assets/tiles.tres" id="1_100s2"]
 [ext_resource type="Script" uid="uid://cu1wcax7qq538" path="res://scenes/shop/shop.gd" id="1_qaxay"]
 [ext_resource type="Texture2D" uid="uid://cygxqa4gj3hyi" path="res://assets/f.png" id="3_7lxhl"]
+[ext_resource type="PackedScene" uid="uid://837encs13ggh" path="res://scenes/shop_ui/shop_ui.tscn" id="4_jp048"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_100s2"]
 size = Vector2(65, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7lxhl"]
+atlas = ExtResource("3_7lxhl")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jp048"]
+atlas = ExtResource("3_7lxhl")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ctpgp"]
+atlas = ExtResource("3_7lxhl")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ptf86"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7lxhl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jp048")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ctpgp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jp048")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Shop" type="Node2D"]
 script = ExtResource("1_qaxay")
@@ -22,10 +55,15 @@ collision_mask = 2
 position = Vector2(59.5, 143.5)
 shape = SubResource("RectangleShape2D_100s2")
 
-[node name="F" type="Sprite2D" parent="."]
+[node name="FGlyph" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(71, 135)
-texture = ExtResource("3_7lxhl")
+z_index = 1
+position = Vector2(71, 134)
+sprite_frames = SubResource("SpriteFrames_ptf86")
+frame = 1
+frame_progress = 0.514236
+
+[node name="ShopUI" parent="." instance=ExtResource("4_jp048")]
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_player_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_player_exited"]
