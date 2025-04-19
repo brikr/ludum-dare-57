@@ -20,6 +20,24 @@ const BLUE_TILE := Vector2i(1, 2)
 const ALIEN_SKULL_TILE := Vector2i(0, 3)
 const ALIEN_TECH_TILE := Vector2i(1, 3)
 
+
+# World Gen
+enum WORLD_GEN_FIELDS {MIN_DEPTH, MAX_DEPTH, COEFFICIENT, THRESHOLD}
+const WORLD_GEN := {
+  Tile.TileObjectType.GOLD: {
+    WORLD_GEN_FIELDS.MIN_DEPTH : 0,
+    WORLD_GEN_FIELDS.MAX_DEPTH : 100,
+    WORLD_GEN_FIELDS.COEFFICIENT : 0.02, # 2x as likely at depth of 100
+    WORLD_GEN_FIELDS.THRESHOLD: 0.5,
+  },
+  Tile.TileObjectType.BLUE: {
+    WORLD_GEN_FIELDS.MIN_DEPTH : 70,
+    WORLD_GEN_FIELDS.MAX_DEPTH : 200,
+    WORLD_GEN_FIELDS.COEFFICIENT : 0.01, # 2x as likely at depth of 200
+    WORLD_GEN_FIELDS.THRESHOLD: 0.8,
+  }
+}
+
 # Animation
 const TILE_BREAKING_FRAME_COUNT := 8
 
