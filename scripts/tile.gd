@@ -20,8 +20,7 @@ func is_diggable():
 
 # how much total digging power must be expended to break this tile
 func difficulty():
-  # TODO calculate
-  return 50.0
+  return Constants.TILE_DIFFICULTY.get(type, 0.0) + Constants.OBJECT_DIFFICULTY.get(objectType, 0.0)
 
 func clear():
   type = TileType.EMPTY

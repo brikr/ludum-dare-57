@@ -22,3 +22,15 @@ const ALIEN_TECH_TILE := Vector2i(1, 3)
 
 # Animation
 const TILE_BREAKING_FRAME_COUNT := 8
+
+# Tile difficulty
+const TILE_DIFFICULTY: Dictionary[Tile.TileType, float] = {
+  Tile.TileType.DIRT: 50.0,
+}
+
+const OBJECT_DIFFICULTY: Dictionary[Tile.TileObjectType, float] = {
+  Tile.TileObjectType.GOLD: 50.0,
+  Tile.TileObjectType.BLUE: 100.0,
+  Tile.TileObjectType.ALIEN_SKULL: 150.0,
+  Tile.TileObjectType.ALIEN_TECH: 200.0,
+}
