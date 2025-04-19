@@ -53,6 +53,8 @@ func _physics_process(delta):
 
   move_and_slide()
 
+
 func _process(delta: float) -> void:
   if Input.is_action_pressed("primary_mouse_action"):
-    pass
+    var mouse_coords = GameState.global_position_to_map_coords(get_global_mouse_position())
+    GameState.dig(mouse_coords)
