@@ -1,44 +1,11 @@
 extends TileMapLayer
 
-######## WORLD GEN ########
 func _ready():
-  gen_map()
-
-func is_vertical_edge(y):
-  return (y == 0 || y == Constants.MAX_GEN_DEPTH - 1 )
-func is_horizontal_edge(x):
-  return (x == 0 || x == Constants.MAX_WORLD_WIDTH - 1)
-  
-func is_edge(x, y):
-  return is_horizontal_edge(x) || is_vertical_edge(y)
-  
-func gen_under_world():
-  for x in Constants.MAX_WORLD_WIDTH:
-    for y in Constants.MAX_GEN_DEPTH:
-      y = y + Constants.SURFACE_HEIGHT
-      var tile = Constants.DIRT_TILE
-      
-      if is_edge(x, y):
-        tile = Constants.HAZARD_TILE
-      
-      set_cell(Vector2(x, y), Constants.SOURCE_ID, tile)
-
-func gen_over_world():
-  for x in Constants.MAX_WORLD_WIDTH:
-    for y in Constants.SURFACE_HEIGHT:
-      var tile = Vector2(-1,-1) # delete tile
-      if is_horizontal_edge(x):
-        tile = Constants.FENCE_TILE
-      
-      set_cell(Vector2(x, y), Constants.SOURCE_ID, tile)
-
-func gen_map():
-  gen_over_world()
-  gen_under_world()
-  
-
-######## TICK PROCESS ########
-@onready var marker: Node2D = get_node("HighlightedTile") 
+  # Pull map data from GameState
+  # I sure hope GameState did map gen before this...
+  for coords in GameState.map:
+    var tile = GameState.map[coords]
+    set_cell(coords, Constants.SOURCE_ID, get_tile_set_tile(tile))
 
 func _process(_delta: float):
   var mouse_pos = get_local_mouse_position() # absolute pos
@@ -46,6 +13,17 @@ func _process(_delta: float):
   highlight_cell(cell_pos)
 
 func highlight_cell(cell_position: Vector2i):
-  marker.position = map_to_local(cell_position)
-  
-  
+  $HighlightedTile.position = map_to_local(cell_position)
+
+func get_tile_set_tile(tile: Tile):
+  match tile.type:
+    Tile.TileType.EMPTY:
+      # Above ground: nothing
+      # Below ground: background dirt
+      return Constants.AIR_TILE if tile.is_above_ground() else Constants.EMPTY_DIRT_TILE
+    Tile.TileType.DIRT:
+      return Constants.DIRT_TILE
+    Tile.TileType.BORDER:
+      # Above ground: fence
+      # Below ground: hazard
+      return Constants.FENCE_TILE if tile.is_above_ground() else Constants.HAZARD_TILE
