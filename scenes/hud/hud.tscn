@@ -6,12 +6,22 @@
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_cgeww")
 
-[node name="FuelWeightValue" type="Label" parent="."]
+[node name="FuelWeightMoney" type="Label" parent="."]
 offset_left = 13.0
 offset_right = 707.0
 offset_bottom = 177.0
 theme = ExtResource("1_48c2t")
-text = "Fuel: 0
-Weight: 0
-Value: $0"
+text = "Fuel: 1.00L
+Weight: 100kg
+Money: $0"
+horizontal_alignment = 2
+
+[node name="CurrentHaulValue" type="Label" parent="."]
+offset_left = 13.0
+offset_top = 177.0
+offset_right = 707.0
+offset_bottom = 211.0
+theme = ExtResource("1_48c2t")
+theme_override_font_sizes/font_size = 24
+text = "Current Haul: $0"
 horizontal_alignment = 2

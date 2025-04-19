@@ -52,10 +52,13 @@ var digging_progress = 0.0
 ## Fuel
 var current_fuel = fuel_capacity
 ## Haul
-# value of haul (in United States Dollars)
+# value of current haul (in United States Dollars)
 var haul_value = 0.0
 # how heavy ur shid is (in kg)
 var haul_weight = 0.0
+## Bank
+# value of sold items
+var bank_value = 0.0
 
 func _ready():
   $AnimatedSprite2D.play()
@@ -207,3 +210,6 @@ func get_jump_velocity() -> float:
 
 func get_jetpack_accel() -> float:
   return max(max_jetpack_accel - get_total_weight() * jetpack_accel_penalty, min_jetpack_accel)
+
+func refuel():
+  current_fuel = fuel_capacity
