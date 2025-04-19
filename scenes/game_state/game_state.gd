@@ -3,6 +3,7 @@ extends Node
 
 signal tile_updated
 
+var player: Player
 var map: Dictionary[Vector2i, Tile] = {}
 
 func _ready():

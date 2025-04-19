@@ -29,7 +29,6 @@ tile_set = ExtResource("3_6q06x")
 [node name="Shop" parent="." instance=ExtResource("4_ow5a4")]
 
 [node name="Player" parent="." instance=ExtResource("2_iuonh")]
-unique_name_in_owner = true
 position = Vector2(150, 152)
 
 [node name="test" type="Sprite2D" parent="."]
