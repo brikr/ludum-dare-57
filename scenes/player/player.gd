@@ -80,7 +80,6 @@ func _process_movement(delta):
       velocity.y = max(velocity.y, -jetpack_speed_limit)
       # consume fuel
       current_fuel -= jetpack_fuel_efficiency
-      print(current_fuel)
 
   move_and_slide()
   clamp_to_world()
