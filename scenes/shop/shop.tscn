@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=4 uid="uid://c8fpd8kkkwavg"]
+
+[ext_resource type="TileSet" uid="uid://dj57dgaexk3lc" path="res://assets/tiles.tres" id="1_100s2"]
+[ext_resource type="Script" uid="uid://cu1wcax7qq538" path="res://scenes/shop/shop.gd" id="1_qaxay"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_100s2"]
+size = Vector2(65, 33)
+
+[node name="Shop" type="Node2D"]
+script = ExtResource("1_qaxay")
+
+[node name="SurfaceTileMap" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAABAAoAAAADAAAAAAACAAoAAAADAAAAAAADAAoAAAADAAAAAAAEAAoAAAADAAAAAAAFAAoAAAADAAAAAAABAAcAAAAAAAQAAAABAAgAAAAAAAUAAAABAAkAAAAAAAYAAAACAAcAAAABAAQAAAACAAgAAAABAAUAAAACAAkAAAABAAYAAAADAAcAAAACAAQAAAADAAgAAAACAAUAAAADAAkAAAACAAYAAAAEAAcAAAADAAQAAAAEAAgAAAADAAUAAAAEAAkAAAADAAYAAAAFAAcAAAAEAAQAAAAFAAgAAAAEAAUAAAAFAAkAAAAEAAYAAAAGAAoAAAADAAAAAAA=")
+tile_set = ExtResource("1_100s2")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(59.5, 143.5)
+shape = SubResource("RectangleShape2D_100s2")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_player_entered"]

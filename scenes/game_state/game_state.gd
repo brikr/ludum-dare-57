@@ -43,7 +43,6 @@ func gen_resource(resourceType: Tile.TileObjectType):
       var depth_coefficient = lerp(min_depth_coefficient, max_depth_coefficient, depth_ratio)
 
       var probability = noise.get_noise_2dv(coords) * y * depth_coefficient
-      print(coords, probability)
       if probability > threashold && map[coords].type == Tile.TileType.DIRT:
         map[coords].objectType = resourceType
 
@@ -92,6 +91,9 @@ func gen_map():
 
 func global_position_to_map_coords(global_pos: Vector2):
   return Vector2i(global_pos / Constants.TILE_WIDTH)
+
+func map_coords_to_global_position(map_coords: Vector2i):
+  return Vector2(map_coords * Constants.TILE_WIDTH)
 
 func dig(coords: Vector2i):
   if map[coords].is_diggable():

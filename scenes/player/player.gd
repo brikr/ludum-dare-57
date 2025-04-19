@@ -121,8 +121,7 @@ func _process_movement(delta):
 
 func _process_digging(delta: float):
   if Input.is_action_pressed("primary_mouse_action"):
-    var new_digging_tile_coords = GameState.global_position_to_map_coords(get_global_mouse_position())
-    var new_digging_tile = GameState.map[new_digging_tile_coords]
+    var new_digging_tile = get_targeted_tile()
     if !new_digging_tile.is_diggable():
       # if it's not diggable, don't start diggin
       clear_digging_state()
@@ -161,12 +160,25 @@ func clear_digging_state():
 
 
 func _process(_delta: float) -> void:
-  # Update highlighted tile position
-  var mouse_pos = get_global_mouse_position()
-  $HighlightedTile.global_position = Vector2(
-    floor(mouse_pos.x / Constants.TILE_WIDTH) * Constants.TILE_WIDTH,
-    floor(mouse_pos.y / Constants.TILE_WIDTH) * Constants.TILE_WIDTH,
+  var targeted_tile = get_targeted_tile()
+  if targeted_tile.is_diggable():
+    # show crosshair
+    $HighlightedTile.visible = true
+    $HighlightedTile.global_position = GameState.map_coords_to_global_position(targeted_tile.coords)
+  else:
+    # hide crosshair
+    $HighlightedTile.visible = false
+
+
+func get_targeted_tile() -> Tile:
+  var mouse_global_pos = get_global_mouse_position()
+  # closest tile in the direction of the mouse
+  var closest_tile_global_pos = Vector2(
+    move_toward(global_position.x, mouse_global_pos.x, Constants.TILE_WIDTH),
+    move_toward(global_position.y, mouse_global_pos.y, Constants.TILE_WIDTH),
   )
+  var hovered_tile_coords = GameState.global_position_to_map_coords(closest_tile_global_pos)
+  return GameState.map[hovered_tile_coords]
 
 
 func clamp_to_world():
@@ -175,15 +187,15 @@ func clamp_to_world():
     Vector2(Constants.MAX_WORLD_WIDTH * Constants.TILE_WIDTH, Constants.MAX_GEN_DEPTH * Constants.TILE_WIDTH)
   )
 
-func get_total_weight():
+func get_total_weight() -> float:
   return player_weight + haul_weight + (current_fuel / 1000)
 
 func add_to_haul(tile: Tile):
   haul_weight += current_digging_tile.weight()
   haul_value += current_digging_tile.value()
 
-func get_jump_velocity():
+func get_jump_velocity() -> float:
   return max(max_jump_velocity - get_total_weight() * jump_velocity_penalty, min_jump_velocity)
 
-func get_jetpack_accel():
+func get_jetpack_accel() -> float:
   return max(max_jetpack_accel - get_total_weight() * jetpack_accel_penalty, min_jetpack_accel)
