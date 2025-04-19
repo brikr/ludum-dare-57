@@ -1,6 +1,6 @@
-class_name Item extends Node
+class_name Item extends Object
 
-enum ItemType {GEAR, CONSUMABLE}
+enum Type {GEAR, CONSUMABLE}
 enum StatImpact {
   FUEL_CAPACITY,
   MAX_JETPACK_ACCEL,
@@ -12,16 +12,18 @@ enum StatImpact {
   DIGGING_POWER,
 }
 
-var itemType: ItemType
-var itemStatImpact: Dictionary[StatImpact, float]
+var type: Type
+var statImpact: Dictionary[StatImpact, float]
+var name: String
 
-func _init(itemType: ItemType, itemStatImpact: Dictionary[StatImpact, float]) -> void:
-  self.itemType = itemType
-  self.itemStatImpact = itemStatImpact
+func _init(type: Type, statImpact: Dictionary[StatImpact, float], name: String) -> void:
+  self.type = type
+  self.statImpact = statImpact
+  self.name = name
 
 func apply(player) -> void:
-  for key in itemStatImpact:
-    var val = itemStatImpact[key]
+  for key in statImpact:
+    var val = statImpact[key]
     match key:
       Item.StatImpact.FUEL_CAPACITY:
         player.fuel_capacity += val

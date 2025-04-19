@@ -83,11 +83,11 @@ func _animate_on_ground(velocity: Vector2):
 func _process_movement(delta):
   # ainskeep tesing
   if Input.is_action_just_pressed("secondary_mouse_action"):
-    Item.new(Item.ItemType.GEAR, {
+    Item.new(Item.Type.GEAR, {
       Item.StatImpact.CURRENT_FUEL: 100,
       Item.StatImpact.MAX_JETPACK_ACCEL: 1000,
       Item.StatImpact.JETPACK_SPEED_LIMIT: 1000
-    }).apply(self)
+    }, "fuck").apply(self)
 
   if is_on_floor():
     # Ground stuff
