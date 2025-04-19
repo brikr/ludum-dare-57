@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+###### STATS ######
 # max horizontal ground speed
 var speed = 150.0
 # acceleration (per physics frame)
@@ -18,12 +19,20 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var terminal_velocity = 350.0
 # digging power (per physics frame)
 var digging_power = 1.0
+# gas tank size (in mL)
+var fuel_capacity = 1000.0
+# how much fuel the jetpack consumes (in mL per physics frame)
+var jetpack_fuel_efficiency = 5.0
 
+###### STATE ######
 # digging state
 var is_digging = false
 var current_digging_tile: Tile
 # amount of power expended on current tile
 var digging_progress = 0.0
+
+# fuel state
+var current_fuel = fuel_capacity
 
 func _ready():
   # set camera limits to generated world
@@ -64,11 +73,14 @@ func _process_movement(delta):
     else:
       velocity.x = move_toward(velocity.x, 0, air_accel)
 
-    if Input.is_action_pressed("jump") and $JetpackDelay.is_stopped():
+    if Input.is_action_pressed("jump") && $JetpackDelay.is_stopped() && current_fuel > 0:
       # jetpack go brrr
       velocity.y -= jetpack_accel
       # limit jetpack boosties
       velocity.y = max(velocity.y, -jetpack_speed_limit)
+      # consume fuel
+      current_fuel -= jetpack_fuel_efficiency
+      print(current_fuel)
 
   move_and_slide()
   clamp_to_world()
