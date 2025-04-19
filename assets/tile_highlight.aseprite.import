@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://oq2j13553qrj"
+path="res://.godot/imported/tile_highlight.aseprite-8e147a046b96bf638f75ae9062ea03ab.res"
+
+[deps]
+
+source_file="res://assets/tile_highlight.aseprite"
+dest_files=["res://.godot/imported/tile_highlight.aseprite-8e147a046b96bf638f75ae9062ea03ab.res"]
+
+[params]
+
