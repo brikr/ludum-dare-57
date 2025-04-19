@@ -20,6 +20,7 @@ func is_edge(x, y):
 
 func gen_under_world():
   gen_base_under_world() # generates dirt and borders
+  gen_out_of_bounds() # dirt outside the hazards as far as the eye can see (7 tiles)
 
   gen_resource(Tile.TileObjectType.BLUE)
   gen_resource(Tile.TileObjectType.GOLD)
@@ -49,13 +50,31 @@ func gen_resource(resourceType: Tile.TileObjectType):
 
 func gen_base_under_world():
   for x in Constants.MAX_WORLD_WIDTH:
-    for y in Constants.MAX_GEN_DEPTH:
-      y = y + Constants.SURFACE_HEIGHT
+    for y in range(Constants.SURFACE_HEIGHT, Constants.MAX_GEN_DEPTH):
       var coords := Vector2i(x, y)
       if is_edge(x, y):
         map[coords] = Tile.Border(coords)
       else:
         map[coords] = Tile.Dirt(coords)
+
+func gen_out_of_bounds():
+  # left
+  for x in range(-7, 0):
+    for y in range(Constants.SURFACE_HEIGHT, Constants.MAX_GEN_DEPTH):
+      var coords := Vector2i(x, y)
+      map[coords] = Tile.Dirt(coords)
+
+  # right
+  for x in range(Constants.MAX_WORLD_WIDTH, Constants.MAX_WORLD_WIDTH + 7):
+    for y in range(Constants.SURFACE_HEIGHT, Constants.MAX_GEN_DEPTH):
+      var coords := Vector2i(x, y)
+      map[coords] = Tile.Dirt(coords)
+
+  # under
+  for x in range(-7, Constants.MAX_WORLD_WIDTH + 7):
+    for y in range(Constants.MAX_GEN_DEPTH, Constants.MAX_GEN_DEPTH + 10):
+      var coords := Vector2i(x, y)
+      map[coords] = Tile.Dirt(coords)
 
 func gen_over_world():
   for x in Constants.MAX_WORLD_WIDTH:

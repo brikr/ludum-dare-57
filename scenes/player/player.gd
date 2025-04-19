@@ -29,7 +29,7 @@ var jetpack_accel_penalty = 0.1
 # max upward speed
 var jetpack_speed_limit = 175.0
 # gas tank size (in mL)
-var fuel_capacity = 3000.0
+var fuel_capacity = 1000.0
 # how much fuel the jetpack consumes (in mL per physics frame)
 var jetpack_fuel_efficiency = 5.0
 ## Digging
@@ -58,13 +58,7 @@ var haul_value = 0.0
 var haul_weight = 0.0
 
 func _ready():
-  # set camera limits to generated world
-  $Camera2D.limit_left = 0.0
-  $Camera2D.limit_right = Constants.MAX_WORLD_WIDTH * Constants.TILE_WIDTH
-  $Camera2D.limit_top = 0.0
-  $Camera2D.limit_bottom = Constants.MAX_GEN_DEPTH * Constants.TILE_WIDTH
   $AnimatedSprite2D.play()
-
 
 func _physics_process(delta):
   _process_movement(delta)

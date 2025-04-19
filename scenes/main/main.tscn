@@ -1,55 +1,37 @@
-[gd_scene load_steps=10 format=3 uid="uid://dbi1s0tx3b5vk"]
+[gd_scene load_steps=6 format=4 uid="uid://dbi1s0tx3b5vk"]
 
 [ext_resource type="Script" uid="uid://bk710nk5wc8ta" path="res://scenes/main/main.gd" id="1_6q06x"]
-[ext_resource type="Texture2D" uid="uid://bu0ricl7ntd50" path="res://assets/tiles.png" id="1_hyk8p"]
 [ext_resource type="PackedScene" uid="uid://eduld2nd3eqw" path="res://scenes/player/player.tscn" id="2_iuonh"]
+[ext_resource type="TileSet" uid="uid://dj57dgaexk3lc" path="res://assets/tiles.tres" id="3_6q06x"]
 [ext_resource type="Script" uid="uid://dwukm0d7mmuhx" path="res://scenes/main/tile_map.gd" id="3_ow5a4"]
 [ext_resource type="PackedScene" uid="uid://dfowoevuj1o11" path="res://scenes/hud/hud.tscn" id="5_6q06x"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iuonh"]
-texture = ExtResource("1_hyk8p")
-0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
-1:0/0 = 0
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-2:0/0 = 0
-2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-0:1/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_vom5j"]
-physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_iuonh")
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6q06x"]
-texture = ExtResource("1_hyk8p")
-0:2/0 = 0
-1:2/0 = 0
-0:3/0 = 0
-1:3/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_ow5a4"]
-sources/0 = SubResource("TileSetAtlasSource_6q06x")
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_6q06x")
 
 [node name="Sky" type="ColorRect" parent="."]
-offset_right = 720.0
-offset_bottom = 1080.0
+offset_left = -373.0
+offset_top = -424.0
+offset_right = 1063.0
+offset_bottom = 656.0
 color = Color(0.439216, 1, 1, 1)
 
-[node name="TileMap" type="Node2D" parent="."]
+[node name="UndergroundTileMap" type="Node2D" parent="."]
 script = ExtResource("3_ow5a4")
 
-[node name="ForegroundTileMap" type="TileMapLayer" parent="TileMap"]
-tile_set = SubResource("TileSet_vom5j")
+[node name="ForegroundTileMap" type="TileMapLayer" parent="UndergroundTileMap"]
+tile_set = ExtResource("3_6q06x")
 
-[node name="ObjectTileMap" type="TileMapLayer" parent="TileMap"]
-tile_set = SubResource("TileSet_ow5a4")
+[node name="ObjectTileMap" type="TileMapLayer" parent="UndergroundTileMap"]
+tile_set = ExtResource("3_6q06x")
+
+[node name="SurfaceTileMap" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAABAAoAAAADAAAAAAACAAoAAAADAAAAAAADAAoAAAADAAAAAAAEAAoAAAADAAAAAAAFAAoAAAADAAAAAAABAAcAAAAAAAQAAAABAAgAAAAAAAUAAAABAAkAAAAAAAYAAAACAAcAAAABAAQAAAACAAgAAAABAAUAAAACAAkAAAABAAYAAAADAAcAAAACAAQAAAADAAgAAAACAAUAAAADAAkAAAACAAYAAAAEAAcAAAADAAQAAAAEAAgAAAADAAUAAAAEAAkAAAADAAYAAAAFAAcAAAAEAAQAAAAFAAgAAAAEAAUAAAAFAAkAAAAEAAYAAAAGAAoAAAADAAAAAAA=")
+tile_set = ExtResource("3_6q06x")
 
 [node name="Player" parent="." instance=ExtResource("2_iuonh")]
 unique_name_in_owner = true
-position = Vector2(20, 16)
+position = Vector2(26, 154)
 
 [node name="test" type="Sprite2D" parent="."]
 position = Vector2(8, 0)
