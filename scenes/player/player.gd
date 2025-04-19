@@ -34,3 +34,8 @@ func _physics_process(delta):
 
 
   move_and_slide()
+
+func _process(delta: float) -> void:
+  if Input.is_action_pressed("primary_mouse_action"):
+    pass
+    
