@@ -18,6 +18,14 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var terminal_velocity = 350.0
 
 
+func _ready():
+  # set camera limits to generated world
+  $Camera2D.limit_left = 0.0
+  $Camera2D.limit_right = Constants.MAX_WORLD_WIDTH * Constants.TILE_WIDTH
+  $Camera2D.limit_top = 0.0
+  $Camera2D.limit_bottom = Constants.MAX_GEN_DEPTH * Constants.TILE_WIDTH
+
+
 func _physics_process(delta):
   if is_on_floor():
     # Ground stuff
@@ -52,9 +60,17 @@ func _physics_process(delta):
       velocity.y = max(velocity.y, -jetpack_speed_limit)
 
   move_and_slide()
+  clamp_to_world()
 
 
 func _process(_delta: float) -> void:
   if Input.is_action_pressed("primary_mouse_action"):
     var mouse_coords = GameState.global_position_to_map_coords(get_global_mouse_position())
     GameState.dig(mouse_coords)
+
+
+func clamp_to_world():
+  position = position.clamp(
+    Vector2(0.0, 0.0),
+    Vector2(Constants.MAX_WORLD_WIDTH * Constants.TILE_WIDTH, Constants.MAX_GEN_DEPTH * Constants.TILE_WIDTH)
+  )
