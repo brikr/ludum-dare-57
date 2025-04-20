@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvhcwsah45gpm"]
+
+[ext_resource type="Theme" uid="uid://dmwt5ilifg3r8" path="res://scenes/ui_theme.tres" id="1_jwvuc"]
+[ext_resource type="Script" uid="uid://du8mfevfhjgd2" path="res://scenes/shop_ui/item_button.gd" id="2_3vb3c"]
+
+[node name="ItemButton" type="Button"]
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 705.0
+offset_bottom = 65.0
+theme = ExtResource("1_jwvuc")
+theme_override_font_sizes/font_size = 24
+text = "Very Cool Item ($100)"
+script = ExtResource("2_3vb3c")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

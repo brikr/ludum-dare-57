@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+class_name Player
+
 ###### STATS ######
 ## Stats might change from shop items or temporary boosts
 ## Weight
@@ -62,6 +64,7 @@ var bank_value = 0.0
 
 func _ready():
   $AnimatedSprite2D.play()
+  GameState.player = self
 
 func _physics_process(delta):
   _process_movement(delta)
@@ -84,14 +87,6 @@ func _animate_on_ground(velocity: Vector2):
       $AnimatedSprite2D.animation = "walk_right"
 
 func _process_movement(delta):
-  # ainskeep tesing
-  if Input.is_action_just_pressed("secondary_mouse_action"):
-    Item.new(Item.Type.GEAR, {
-      Item.StatImpact.CURRENT_FUEL: 100,
-      Item.StatImpact.MAX_JETPACK_ACCEL: 1000,
-      Item.StatImpact.JETPACK_SPEED_LIMIT: 1000
-    }, "fuck").apply(self)
-
   if is_on_floor():
     # Ground stuff
     # Handle jump
@@ -213,3 +208,8 @@ func get_jetpack_accel() -> float:
 
 func refuel():
   current_fuel = fuel_capacity
+
+func sell_haul():
+  bank_value += haul_value
+  haul_value = 0.0
+  haul_weight = 0.0

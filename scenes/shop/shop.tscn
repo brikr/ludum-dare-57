@@ -64,6 +64,7 @@ frame = 1
 frame_progress = 0.514236
 
 [node name="ShopUI" parent="." instance=ExtResource("4_jp048")]
+visible = false
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_player_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_player_exited"]

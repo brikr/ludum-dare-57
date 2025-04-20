@@ -1,6 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://837encs13ggh"]
+[gd_scene load_steps=3 format=3 uid="uid://837encs13ggh"]
 
 [ext_resource type="Script" uid="uid://mb61cud1laj6" path="res://scenes/shop_ui/shop_ui.gd" id="1_67u7h"]
+[ext_resource type="Theme" uid="uid://dmwt5ilifg3r8" path="res://scenes/ui_theme.tres" id="2_u3gf3"]
 
 [node name="ShopUI" type="CanvasLayer"]
 script = ExtResource("1_67u7h")
+
+[node name="Header" type="Label" parent="."]
+offset_top = 240.0
+offset_right = 720.0
+offset_bottom = 350.0
+theme = ExtResource("2_u3gf3")
+theme_override_font_sizes/font_size = 80
+text = "Shop"
+horizontal_alignment = 1
+
+[node name="GearContainer" type="VBoxContainer" parent="."]
+offset_left = 15.0
+offset_top = 351.0
+offset_right = 705.0
+offset_bottom = 1021.0
+theme = ExtResource("2_u3gf3")

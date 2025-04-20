@@ -7,8 +7,8 @@ const CURRENT_HAUL_VALUE_TEMPLATE := "Current haul: $%d"
 
 func _process(delta):
   $FuelWeightMoney.text = FUEL_WEIGHT_MONEY_TEMPLATE % [
-    %Player.current_fuel / 1000,
-    %Player.get_total_weight(),
-    %Player.bank_value
+    GameState.player.current_fuel / 1000,
+    GameState.player.get_total_weight(),
+    GameState.player.bank_value
   ]
-  $CurrentHaulValue.text = CURRENT_HAUL_VALUE_TEMPLATE % %Player.haul_value
+  $CurrentHaulValue.text = CURRENT_HAUL_VALUE_TEMPLATE % GameState.player.haul_value
