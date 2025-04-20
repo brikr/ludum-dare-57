@@ -16,9 +16,13 @@ var GEAR_REGISTRY = [
     Item.Category.DRILL, 5000.0, Item.Type.GEAR, {Item.StatImpact.DIGGING_POWER: 1.0}),
   ## Heat
   Item.new(
+    "Wood Heat Sink",
+    "",
+    Item.Category.HEAT, 50.0, Item.Type.GEAR, {Item.StatImpact.HEAT_CAPACITY: 50.0}),
+  Item.new(
     "Aluminum Heat Sink",
     "",
-    Item.Category.HEAT, 100.0, Item.Type.GEAR, {Item.StatImpact.HEAT_CAPACITY: 100.0, Item.StatImpact.HEAT_DECAY_RATE: 0.5}),
+    Item.Category.HEAT, 500.0, Item.Type.GEAR, {Item.StatImpact.HEAT_CAPACITY: 100.0, Item.StatImpact.HEAT_DECAY_RATE: 0.5}),
   Item.new(
     "Cryocooler",
     "",
