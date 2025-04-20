@@ -11,30 +11,36 @@ var initial_position: Vector2
 ## Stats might change from shop items or temporary boosts
 ## Weight
 # how fat u r (in kg)
-var player_weight = 100.0
+var player_weight = 10000.0
 ## Speed and acceleration
 # max horizontal ground speed
-var speed = 150.0
+var max_top_speed = 200.0
+# lowest your top speed can be if you're overburdened
+var min_top_speed = 75.0
+# how much your top speed is lowered per kg of weight
+var speed_penalty = 0.5
 # acceleration (per physics frame)
 var accel = 30.0
 # acceleration in the air
 var air_accel = 5.0
 ## Jumping
 # instantaneous vertical velocity bonus when jumping off the ground at 0kg
-var max_jump_velocity = 250.0
+var max_jump_velocity = 200.0
 # lowest jump velocity can go to if you're overburdened
 var min_jump_velocity = 150.0
 # how much your jump velocity is lowered per kg of weight
-var jump_velocity_penalty = 0.5
+var jump_velocity_penalty = 0.0
 ## Jetpack
 # jetpack vertical acceleration at 0kg
 var max_jetpack_accel = 40.0
 # lowest jetpack accel can go to if you're overburdened
 var min_jetpack_accel = 15.0
 # how much your jetpack accel is lowered per kg of weight
-var jetpack_accel_penalty = 0.1
+var jetpack_accel_penalty = 0.0
 # max upward speed
-var jetpack_speed_limit = 175.0
+var max_jetpack_top_speed = 225.0
+var min_jetpack_top_speed = 80.0
+var jetpack_speed_penalty = 0.5
 # gas tank size (in mL)
 var fuel_capacity = 1000.0
 # how much fuel the jetpack consumes (in mL per physics frame)
@@ -137,7 +143,7 @@ func _process_movement(delta):
     var move_direction = Input.get_axis("move_left", "move_right")
     if move_direction:
       facing_right = move_direction > 0
-      velocity.x = move_toward(velocity.x, move_direction * speed, accel)
+      velocity.x = move_toward(velocity.x, move_direction * get_top_speed(), accel)
     else:
       velocity.x = move_toward(velocity.x, 0, accel)
   else:
@@ -150,14 +156,14 @@ func _process_movement(delta):
     var move_direction = Input.get_axis("move_left", "move_right")
     if move_direction:
       facing_right = move_direction > 0
-      velocity.x = move_toward(velocity.x, move_direction * speed, air_accel)
+      velocity.x = move_toward(velocity.x, move_direction * get_top_speed(), air_accel)
     else:
       velocity.x = move_toward(velocity.x, 0, air_accel)
 
     if Input.is_action_pressed("jump") && $JetpackDelay.is_stopped() && current_fuel > 0:
       is_jetpacking = true
       # jetpack go brrr
-      velocity.y = move_toward(velocity.y, -jetpack_speed_limit, get_jetpack_accel())
+      velocity.y = move_toward(velocity.y, -get_jetpack_top_speed(), get_jetpack_accel())
       # consume fuel
       current_fuel -= jetpack_fuel_efficiency
       $JetpackExhaust.emitting = true
@@ -267,8 +273,14 @@ func add_to_haul(tile: Tile):
   haul_weight += current_digging_tile.weight()
   haul_value += current_digging_tile.value()
 
+func get_top_speed() -> float:
+  return max(max_top_speed - get_total_weight() * speed_penalty, min_top_speed)
+
 func get_jump_velocity() -> float:
   return max(max_jump_velocity - get_total_weight() * jump_velocity_penalty, min_jump_velocity)
+
+func get_jetpack_top_speed() -> float:
+  return max(max_jetpack_top_speed - get_total_weight() * jetpack_speed_penalty, min_jetpack_top_speed)
 
 func get_jetpack_accel() -> float:
   return max(max_jetpack_accel - get_total_weight() * jetpack_accel_penalty, min_jetpack_accel)
