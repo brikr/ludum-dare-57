@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 const FUEL_WEIGHT_MONEY_TEMPLATE := """Fuel: %.2fL
-Drill Heat: %dC
+Drill Heat: %03dC
 Weight: %dkg
 Money: $%d"""
 const CURRENT_HAUL_VALUE_TEMPLATE := "Current haul: $%d"
