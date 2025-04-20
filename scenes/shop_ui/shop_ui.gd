@@ -25,3 +25,4 @@ func item_button_pressed(button: ItemButton):
   button.item.apply()
   button.queue_free()
   buttons.erase(button.item.name)
+  update_button_states()
