@@ -6,6 +6,10 @@ Drill Heat: %dC
 Money: $%d"""
 const CURRENT_HAUL_VALUE_TEMPLATE := "Current haul: $%d"
 
+func _ready() -> void:
+  print("maxH", Constants.MAX_GEN_DEPTH - Constants.SURFACE_HEIGHT, " ", $DepthProgressBar.value)
+  $DepthProgressBar.max_value = Constants.MAX_GEN_DEPTH - Constants.SURFACE_HEIGHT - 1 # border width
+
 func _process(delta):
   $Status.text = FUEL_WEIGHT_MONEY_TEMPLATE % [
     GameState.player.current_fuel / 1000,
@@ -20,6 +24,8 @@ func _process(delta):
   else:
     $RespawnHint.visible = false
 
+  $DepthProgressBar.value = GameState.get_player_map_coords().y - Constants.SURFACE_HEIGHT + 1
+  print($DepthProgressBar.value)
   if GameState.has_won():
     $WinNotice.visible = true
   else:

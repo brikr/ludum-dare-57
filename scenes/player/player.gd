@@ -48,7 +48,7 @@ var jetpack_fuel_efficiency = 5.0
 ## Digging
 # digging power (per physics frame)
 # TODO: this should be 1.0 for real digging to return
-var digging_power = 1.0
+var digging_power = 1000000.0
 var digging_heat_gen = 0.5
 ## Heat
 # total heat value before it impacts digging
@@ -330,8 +330,8 @@ func respawn():
   # create haul drop
   if haul_weight > 0.0 || haul_value > 0.0 || has_gonster:
     var haul_instance = dropped_haul_scene.instantiate()
-    haul_instance.haul_value = haul_value * haul_penalty
-    haul_instance.haul_weight = haul_weight * haul_penalty
+    haul_instance.haul_value = round(haul_value * haul_penalty)
+    haul_instance.haul_weight = round(haul_weight * haul_penalty)
     haul_instance.haul_has_gonster = has_gonster
     haul_instance.position = position
     print(haul_instance.haul_has_gonster)
