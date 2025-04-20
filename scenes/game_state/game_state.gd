@@ -10,6 +10,8 @@ var gonster_init_position = Vector2i(0,0)
 func _ready():
   gen_map()
 
+####### GAME STATE STATE #######
+var player_has_won = false
 
 ####### WORLD GEN #######
 func is_vertical_edge(y):
@@ -169,3 +171,7 @@ func dig(coords: Vector2i):
   if map[coords].is_diggable():
     map[coords].clear()
     tile_updated.emit(map[coords])
+
+func has_won():
+  player_has_won = player_has_won || (player.has_gonster && global_position_to_map_coords(player.position).y < Constants.SURFACE_HEIGHT)
+  return player_has_won
