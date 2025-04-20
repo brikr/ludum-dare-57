@@ -19,3 +19,8 @@ func _process(delta):
     $RespawnHint.visible = true
   else:
     $RespawnHint.visible = false
+
+  if GameState.has_won():
+    $WinNotice.visible = true
+  else:
+    $WinNotice.visible = false

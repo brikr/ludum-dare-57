@@ -16,4 +16,5 @@ func _process(_delta):
 func place_gonster():
   var gonster_instance = gonster_scene.instantiate()
   gonster_instance.position = GameState.gonster_init_position
+  gonster_instance.position = Vector2i(120, 120)
   add_child(gonster_instance)
