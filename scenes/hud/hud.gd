@@ -19,13 +19,13 @@ func _process(delta):
   ]
   $CurrentHaulValue.text = CURRENT_HAUL_VALUE_TEMPLATE % GameState.player.haul_value
 
-  if GameState.player.current_fuel <= 0.0:
+  if GameState.player.current_fuel <= 0.0 && !GameState.is_player_above_ground():
     $RespawnHint.visible = true
   else:
     $RespawnHint.visible = false
 
   $DepthProgressBar.value = GameState.get_player_map_coords().y - Constants.SURFACE_HEIGHT + 1
-  print($DepthProgressBar.value)
+
   if GameState.has_won():
     $WinNotice.visible = true
   else:

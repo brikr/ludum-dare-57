@@ -170,11 +170,14 @@ func map_coords_to_global_position(map_coords: Vector2i):
 func get_player_map_coords():
   return global_position_to_map_coords(player.position)
 
+func is_player_above_ground():
+  return (GameState.get_player_map_coords().y - Constants.SURFACE_HEIGHT + 1) < 1
+
 func dig(coords: Vector2i):
   if map[coords].is_diggable():
     map[coords].clear()
     tile_updated.emit(map[coords])
 
 func has_won():
-  player_has_won = player_has_won || (player.has_gonster && global_position_to_map_coords(player.position).y < Constants.SURFACE_HEIGHT)
+  player_has_won = player_has_won || (player.has_gonster && is_player_above_ground())
   return player_has_won
