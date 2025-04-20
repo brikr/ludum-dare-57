@@ -42,3 +42,5 @@ position = Vector2(8, 0)
 [node name="Music" type="AudioStreamPlayer" parent="."]
 volume_db = -5.0
 autoplay = true
+
+[connection signal="gonster_dropped" from="Player" to="." method="_on_player_gonster_dropped"]
