@@ -14,7 +14,7 @@ theme = ExtResource("1_48c2t")
 theme_override_font_sizes/font_size = 48
 text = "Fuel: 1.00L
 Weight: 100kg
-Heat: 10F
+Heat: 10C
 Money: $0"
 horizontal_alignment = 2
 
