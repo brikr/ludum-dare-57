@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://837encs13ggh"]
 
 [ext_resource type="Script" uid="uid://mb61cud1laj6" path="res://scenes/shop_ui/shop_ui.gd" id="1_67u7h"]
-[ext_resource type="Theme" uid="uid://dmwt5ilifg3r8" path="res://scenes/ui_theme.tres" id="2_u3gf3"]
+[ext_resource type="Theme" uid="uid://dmwt5ilifg3r8" path="res://assets/ui_theme.tres" id="2_u3gf3"]
 
 [node name="ShopUI" type="CanvasLayer"]
 script = ExtResource("1_67u7h")

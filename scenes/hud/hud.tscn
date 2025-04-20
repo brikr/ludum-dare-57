@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dfowoevuj1o11"]
 
-[ext_resource type="Theme" uid="uid://dmwt5ilifg3r8" path="res://scenes/ui_theme.tres" id="1_48c2t"]
+[ext_resource type="Theme" uid="uid://dmwt5ilifg3r8" path="res://assets/ui_theme.tres" id="1_48c2t"]
 [ext_resource type="Script" uid="uid://c57mj3ygc5bdo" path="res://scenes/hud/hud.gd" id="1_cgeww"]
 
 [node name="HUD" type="CanvasLayer"]
@@ -10,7 +10,6 @@ script = ExtResource("1_cgeww")
 offset_left = 15.0
 offset_right = 705.0
 offset_bottom = 177.0
-theme = ExtResource("1_48c2t")
 theme_override_font_sizes/font_size = 48
 text = "Fuel: 1.00L
 Weight: 100kg
