@@ -2,6 +2,11 @@ extends CharacterBody2D
 
 class_name Player
 
+var dropped_haul_scene = preload("res://scenes/dropped_haul/dropped_haul.tscn")
+
+# Used when respawning
+var initial_position: Vector2
+
 ###### STATS ######
 ## Stats might change from shop items or temporary boosts
 ## Weight
@@ -16,7 +21,7 @@ var accel = 30.0
 var air_accel = 5.0
 ## Jumping
 # instantaneous vertical velocity bonus when jumping off the ground at 0kg
-var max_jump_velocity = 300.0
+var max_jump_velocity = 250.0
 # lowest jump velocity can go to if you're overburdened
 var min_jump_velocity = 150.0
 # how much your jump velocity is lowered per kg of weight
@@ -77,6 +82,7 @@ var facing_right = true
 func _ready():
   $AnimatedSprite2D.play()
   GameState.player = self
+  initial_position = position
 
 func _physics_process(delta):
   _process_movement(delta)
@@ -197,6 +203,8 @@ func _process_digging(delta: float):
 
     # if our current progress exceeds the tile's difficulty, blow it up
     if digging_progress >= current_digging_tile.difficulty():
+      # play sound
+      $BreakSound.play()
       # collect resources
       add_to_haul(current_digging_tile)
       # belete tile
@@ -216,6 +224,9 @@ func clear_digging_state():
 
 
 func _process(_delta: float) -> void:
+  if Input.is_action_just_pressed("respawn"):
+    respawn()
+
   var targeted_tile = get_targeted_tile()
   if targeted_tile.is_diggable():
     # show crosshair
@@ -269,3 +280,19 @@ func sell_haul():
   bank_value += haul_value
   haul_value = 0.0
   haul_weight = 0.0
+
+func respawn():
+  # create haul drop
+  if haul_weight > 0.0 || haul_value > 0.0:
+    var haul_instance = dropped_haul_scene.instantiate()
+    haul_instance.haul_value = haul_value
+    haul_instance.haul_weight = haul_weight
+    haul_instance.position = position
+    add_sibling(haul_instance)
+    # clear ur haul
+    haul_weight = 0.0
+    haul_value = 0.0
+  # tp to start and refuel
+  position = initial_position
+  velocity = Vector2.ZERO
+  refuel()

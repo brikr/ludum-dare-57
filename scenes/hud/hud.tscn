@@ -6,7 +6,7 @@
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_cgeww")
 
-[node name="FuelWeightMoney" type="Label" parent="."]
+[node name="Status" type="Label" parent="."]
 offset_left = 15.0
 offset_right = 705.0
 offset_bottom = 177.0
@@ -14,7 +14,7 @@ theme = ExtResource("1_48c2t")
 theme_override_font_sizes/font_size = 48
 text = "Fuel: 1.00L
 Weight: 100kg
-Heat: 10C
+Drill Heat: 10C
 Money: $0"
 horizontal_alignment = 2
 
@@ -27,3 +27,14 @@ theme = ExtResource("1_48c2t")
 theme_override_font_sizes/font_size = 24
 text = "Current Haul: $0"
 horizontal_alignment = 2
+
+[node name="RespawnHint" type="Label" parent="."]
+offset_top = 104.0
+offset_right = 720.0
+offset_bottom = 1080.0
+theme = ExtResource("1_48c2t")
+theme_override_font_sizes/font_size = 32
+text = "Press K to respawn
+Your haul will be left here"
+horizontal_alignment = 1
+vertical_alignment = 1

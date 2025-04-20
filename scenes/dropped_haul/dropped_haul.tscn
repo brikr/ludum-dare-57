@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1fk6y7lqfdx4"]
+
+[ext_resource type="Script" uid="uid://3wwao2mv8ul8" path="res://scenes/dropped_haul/dropped_haul.gd" id="1_b6l23"]
+[ext_resource type="Texture2D" uid="uid://cy4fyxnr7bmuk" path="res://assets/dropped_haul.png" id="1_j5iex"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b6l23"]
+size = Vector2(12, 12)
+
+[node name="DroppedHaul" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 3
+contact_monitor = true
+max_contacts_reported = 2
+script = ExtResource("1_b6l23")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -2)
+texture = ExtResource("1_j5iex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_b6l23")
+
+[node name="CollectableTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_player_touched"]

@@ -9,6 +9,7 @@ var map: Dictionary[Vector2i, Tile] = {}
 func _ready():
   gen_map()
 
+
 ####### WORLD GEN #######
 func is_vertical_edge(y):
   return (y == 0 || y == Constants.MAX_GEN_DEPTH - 1)
