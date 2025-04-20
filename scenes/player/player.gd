@@ -52,8 +52,10 @@ var digging_power = 1.0
 var digging_heat_gen = 0.5
 ## Heat
 # total heat value before it impacts digging
-var heat_capacity = 200
+var heat_capacity = 100
 var heat_decay_rate = 1.0
+# how much heat is gained per tile depth
+var heat_per_depth = 1.0
 ## Falling
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -287,7 +289,7 @@ func clamp_to_world():
   )
 
 func get_ambient_heat() -> float:
-  return GameState.global_position_to_map_coords(get_global_position()).y
+  return GameState.global_position_to_map_coords(get_global_position()).y * heat_per_depth
 
 func get_total_heat() -> float:
   return get_ambient_heat() + current_dig_heat
