@@ -85,6 +85,22 @@ func gen_base_under_world():
                 map[coords] = Tile.Stone(coords)
     )
     gen_chasms()
+    gen_end_chasm_bubble()
+
+func gen_end_chasm_bubble():
+    var radius = 5
+    var center_x = Constants.MAX_WORLD_WIDTH / 2
+    var center_y = Constants.MAX_GEN_DEPTH - 2  # 1 tile above bottom
+
+    for x in range(center_x - radius, center_x + radius + 1):
+        for y in range(center_y - radius, center_y + radius + 1):
+            var coords = Vector2i(x, y)
+            var dx = x - center_x
+            var dy = y - center_y
+            var distance = sqrt(dx * dx + dy * dy)
+
+            if distance <= radius and not is_edge(x, y):
+                map[coords] = Tile.Empty(coords)
 
 func gen_chasms():
     var noise = GenUtils.get_chasm_noise()
@@ -106,7 +122,6 @@ func gen_chasms():
             if !is_edge(x, y) and probability > threshold:
                 map[coords] = Tile.Empty(coords)
     )
-
 func gen_out_of_bounds():
   # left
   for x in range(-7, 0):
