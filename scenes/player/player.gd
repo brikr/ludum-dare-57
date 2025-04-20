@@ -42,7 +42,7 @@ var jetpack_fuel_efficiency = 5.0
 ## Digging
 # digging power (per physics frame)
 # TODO: this should be 1.0 for real digging to return
-var digging_power = 1000.0
+var digging_power = 1.0
 var digging_heat_gen = 0.5
 ## Heat
 # total heat value before it impacts digging
