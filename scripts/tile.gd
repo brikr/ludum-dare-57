@@ -1,7 +1,9 @@
 class_name Tile extends Object
 
-enum TileType {EMPTY, DIRT, BORDER}
+enum TileType {EMPTY, DIRT, STONE, BORDER}
 enum TileObjectType {NONE, GOLD, BLUE, RED, GREEN, ALIEN_SKULL, ALIEN_TECH}
+
+const DIGGABLE_TILES = [TileType.DIRT, TileType.STONE]
 
 var coords: Vector2i
 var type: TileType
@@ -34,6 +36,9 @@ func clear():
 
 static func Dirt(coords, objectType = TileObjectType.NONE):
   return Tile.new(coords, TileType.DIRT, objectType)
+
+static func Stone(coords, objectType = TileObjectType.NONE):
+  return Tile.new(coords, TileType.STONE, objectType)
 
 static func Border(coords):
   return Tile.new(coords, TileType.BORDER, TileObjectType.NONE)
