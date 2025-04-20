@@ -8,7 +8,6 @@ var is_shopping = false
 func _process(delta):
   if Input.is_action_just_pressed("interact") && player_present:
     is_shopping = true
-    GameState.player.refuel()
     GameState.player.sell_haul()
     $ShopUI.visible = true
     $ShopUI.update_button_states()
