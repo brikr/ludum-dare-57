@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=4 uid="uid://c8esxak2il3ud"]
+[gd_scene load_steps=10 format=4 uid="uid://c8esxak2il3ud"]
 
 [ext_resource type="TileSet" uid="uid://dj57dgaexk3lc" path="res://assets/tiles.tres" id="1_r6ap8"]
 [ext_resource type="Script" uid="uid://b0w0frb8nwsux" path="res://scenes/gas/gas.gd" id="1_wjyab"]
 [ext_resource type="Texture2D" uid="uid://cygxqa4gj3hyi" path="res://assets/f.png" id="3_avo6q"]
+[ext_resource type="AudioStream" uid="uid://csfduqia7egyj" path="res://assets/sounds/refuel.wav" id="4_avo6q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_unrk4"]
 size = Vector2(16, 32)
@@ -59,6 +60,10 @@ visible = false
 z_index = 1
 position = Vector2(120, 119)
 sprite_frames = SubResource("SpriteFrames_ffd2y")
+
+[node name="RefuelSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_avo6q")
+volume_db = -15.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_player_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_player_exited"]
