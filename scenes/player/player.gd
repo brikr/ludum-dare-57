@@ -234,7 +234,7 @@ func _process(_delta: float) -> void:
     respawn()
 
   var targeted_tile = get_targeted_tile()
-  if targeted_tile.is_diggable():
+  if targeted_tile && targeted_tile.is_diggable():
     # show crosshair
     $HighlightedTile.visible = true
     $HighlightedTile.global_position = GameState.map_coords_to_global_position(targeted_tile.coords)
@@ -245,14 +245,36 @@ func _process(_delta: float) -> void:
 
 func get_targeted_tile() -> Tile:
   var mouse_global_pos = get_global_mouse_position()
-  # closest tile in the direction of the mouse
-  var closest_tile_global_pos = Vector2(
-    move_toward(global_position.x, mouse_global_pos.x, Constants.TILE_WIDTH),
-    move_toward(global_position.y, mouse_global_pos.y, Constants.TILE_WIDTH),
-  )
-  var hovered_tile_coords = GameState.global_position_to_map_coords(closest_tile_global_pos)
-  return GameState.map[hovered_tile_coords]
+  var player_tile_coords = GameState.global_position_to_map_coords(global_position)
+  # if the actual hovered tile is next to the player, highlight it
+  var hovered_tile_coords = GameState.global_position_to_map_coords(mouse_global_pos)
+  if (hovered_tile_coords - player_tile_coords).length() == 1:
+      return GameState.map.get(hovered_tile_coords)
+  # otherwise, highlight a tile in roughly the mouse direction (but with equal angle ranges given to each tile)
+  var target_offset = angle_to_tile_offset(get_angle_to(mouse_global_pos))
+  var preferred_tile_coords = player_tile_coords + target_offset
+  return GameState.map.get(preferred_tile_coords)
 
+func angle_to_tile_offset(angle: float) -> Vector2i:
+  # Normalize the angle to range [0, 2π)
+  angle = fposmod(angle + PI * 2, PI * 2)
+
+  # Each sector is 45 degrees (π/4 radians)
+  var sector = int(round(angle / (PI / 4))) % 8
+
+  # Map the sector index to a direction vector
+  var direction_vectors = [
+      Vector2i(1, 0),    # 0 → Right
+      Vector2i(1, 1),    # 1 → Down-Right
+      Vector2i(0, 1),    # 2 → Down
+      Vector2i(-1, 1),   # 3 → Down-Left
+      Vector2i(-1, 0),   # 4 → Left
+      Vector2i(-1, -1),  # 5 → Up-Left
+      Vector2i(0, -1),   # 6 → Up
+      Vector2i(1, -1),   # 7 → Up-Right
+  ]
+
+  return direction_vectors[sector]
 
 func clamp_to_world():
   position = position.clamp(
