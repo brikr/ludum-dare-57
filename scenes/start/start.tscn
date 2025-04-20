@@ -1,0 +1,105 @@
+[gd_scene load_steps=4 format=3 uid="uid://gvhu6dx75e0g"]
+
+[ext_resource type="Texture2D" uid="uid://cbhudxw6ack6v" path="res://assets/logo.png" id="1_662lp"]
+[ext_resource type="Theme" uid="uid://dmwt5ilifg3r8" path="res://assets/ui_theme.tres" id="1_ae20m"]
+[ext_resource type="Script" uid="uid://cpgcwlqecbooq" path="res://scenes/start/start.gd" id="1_oeh0t"]
+
+[node name="Start" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+theme = ExtResource("1_ae20m")
+script = ExtResource("1_oeh0t")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 2
+offset_right = 720.0
+offset_bottom = 1080.0
+theme = ExtResource("1_ae20m")
+color = Color(0, 0.0941176, 0.0941176, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 720.0
+offset_bottom = 1080.0
+theme = ExtResource("1_ae20m")
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Story1" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_ae20m")
+theme_override_font_sizes/normal_font_size = 24
+text = "The year is 3035..."
+fit_content = true
+
+[node name="Story2" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_ae20m")
+theme_override_font_sizes/normal_font_size = 24
+text = "All resources on planet Earth are exhausted. Society has been a dystopia for generations."
+fit_content = true
+
+[node name="Story3" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_ae20m")
+theme_override_font_sizes/normal_font_size = 24
+text = "But a new hope has revealed itself: deep in the bowels of an alien world lies an ancient concoction capable of producing unimaginable efficiency."
+fit_content = true
+
+[node name="Story4" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_ae20m")
+theme_override_font_sizes/normal_font_size = 24
+text = "Our brave miner must journey to the depths of..."
+fit_content = true
+
+[node name="Logo" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_ae20m")
+texture = ExtResource("1_662lp")
+expand_mode = 5
+
+[node name="Instructions1" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_ae20m")
+theme_override_font_sizes/normal_font_size = 20
+text = "On Digma Balis, collect resources and sell them at the shop for money that you can use to upgrade your equipment."
+fit_content = true
+
+[node name="Instructions2" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_ae20m")
+theme_override_font_sizes/normal_font_size = 20
+text = "But be careful, anything you pick up while you're down there needs to be brought back to the surface if you want to get paid."
+fit_content = true
+
+[node name="Instructions3" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_ae20m")
+theme_override_font_sizes/normal_font_size = 20
+text = "Find the ancient concoction at the bottom and bring it to the surface to win."
+fit_content = true
+
+[node name="StartGame" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_ae20m")
+theme_override_font_sizes/font_size = 32
+text = "Start Game"
+
+[connection signal="pressed" from="VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]

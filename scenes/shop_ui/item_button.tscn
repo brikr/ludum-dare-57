@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cvhcwsah45gpm"]
 
-[ext_resource type="Theme" uid="uid://dmwt5ilifg3r8" path="res://scenes/ui_theme.tres" id="1_jwvuc"]
+[ext_resource type="Theme" uid="uid://dmwt5ilifg3r8" path="res://assets/ui_theme.tres" id="1_jwvuc"]
 [ext_resource type="Script" uid="uid://du8mfevfhjgd2" path="res://scenes/shop_ui/item_button.gd" id="2_3vb3c"]
 
 [node name="ItemButton" type="Button"]
