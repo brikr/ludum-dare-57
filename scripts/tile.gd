@@ -18,7 +18,7 @@ func is_above_ground():
   return coords.y < Constants.SURFACE_HEIGHT
 
 func is_diggable():
-  return type == TileType.DIRT
+  return type in DIGGABLE_TILES
 
 # how much total digging power must be expended to break this tile
 func difficulty():
