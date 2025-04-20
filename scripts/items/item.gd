@@ -10,6 +10,7 @@ enum StatImpact {
   JETPACK_FUEL_EFFICIENCY,
   CURRENT_FUEL,
   DIGGING_POWER,
+  HEAT_CAPACITY,
 }
 
 var type: Type
@@ -43,3 +44,5 @@ func apply() -> void:
         GameState.player.current_fuel += val
       Item.StatImpact.DIGGING_POWER:
         GameState.player.digging_power += val
+      Item.StatImpact.HEAT_CAPACITY:
+        GameState.player.heat_capacity += val

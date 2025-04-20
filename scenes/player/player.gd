@@ -43,6 +43,10 @@ var jetpack_fuel_efficiency = 5.0
 # digging power (per physics frame)
 # TODO: this should be 1.0 for real digging to return
 var digging_power = 1.0
+var digging_heat_gen = 1.0
+## Heat
+# total heat value before it impacts digging
+var heat_capacity = 200
 ## Falling
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -58,6 +62,9 @@ var current_digging_tile: Tile
 var digging_progress = 0.0
 ## Fuel
 var current_fuel = fuel_capacity
+## Heat
+# how hot ur shid is (in f)
+var current_dig_heat = 0.0
 ## Haul
 # value of current haul (in United States Dollars)
 var haul_value = 0.0
@@ -78,6 +85,7 @@ func _ready():
 
 func _physics_process(delta):
   _process_movement(delta)
+  _process_heat(delta)
   _process_digging(delta)
   _process_animation()
 
@@ -102,10 +110,13 @@ func _process_animation():
       # air
       if is_jetpacking:
         $AnimatedSprite2D.speed_scale = 2.0
+        if !$JetPackSound.playing:
+          $JetPackSound.play()
       else:
         # if not jetpacking, just freeze on first frame of air anim
         $AnimatedSprite2D.speed_scale = 0.0
         $AnimatedSprite2D.frame = 0
+        $JetPackSound.stop()
       if facing_right:
         $AnimatedSprite2D.animation = "air_right"
       else:
@@ -115,6 +126,7 @@ func _process_animation():
 func _process_movement(delta):
   if is_on_floor():
     # Ground stuff
+    is_jetpacking = false
     # Handle jump
     if Input.is_action_just_pressed("jump"):
       velocity.y = get_jump_velocity() * -1
@@ -155,16 +167,27 @@ func _process_movement(delta):
   move_and_slide()
   clamp_to_world()
 
+func _process_heat(delta: float):
+  if is_digging:
+    current_dig_heat += digging_heat_gen
+  elif current_dig_heat > 0:
+    current_dig_heat -= digging_heat_gen
+  elif current_dig_heat < 0:
+    current_dig_heat = 0
 
 func _process_digging(delta: float):
-  if Input.is_action_pressed("primary_mouse_action"):
+  var can_dig = get_total_heat() < heat_capacity
+
+  if Input.is_action_pressed("primary_mouse_action") && can_dig:
     var new_digging_tile = get_targeted_tile()
     if !new_digging_tile.is_diggable():
       # if it's not diggable, don't start diggin
       clear_digging_state()
       return
 
-    var is_digging = true
+    is_digging = true
+    if !$DiggingSound.playing:
+      $DiggingSound.play()
     $HighlightedTile/TileBreaking.visible = true
     # if we're digging a different tile than before, reset progress
     if new_digging_tile != current_digging_tile:
@@ -191,6 +214,7 @@ func _process_digging(delta: float):
 
 func clear_digging_state():
   $HighlightedTile/TileBreaking.visible = false
+  $DiggingSound.stop()
   is_digging = false
   current_digging_tile = null
   digging_progress = 0.0
@@ -226,6 +250,12 @@ func clamp_to_world():
     Vector2(0.0, 0.0),
     Vector2(Constants.MAX_WORLD_WIDTH * Constants.TILE_WIDTH, Constants.MAX_GEN_DEPTH * Constants.TILE_WIDTH)
   )
+
+func get_ambient_heat() -> float:
+  return GameState.global_position_to_map_coords(get_global_position()).y
+
+func get_total_heat() -> float:
+  return get_ambient_heat() + current_dig_heat
 
 func get_total_weight() -> float:
   return player_weight + haul_weight + (current_fuel / 1000)
