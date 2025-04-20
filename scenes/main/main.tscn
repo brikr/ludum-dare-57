@@ -32,7 +32,7 @@ tile_set = ExtResource("3_6q06x")
 [node name="Gas" parent="." instance=ExtResource("5_hujxm")]
 
 [node name="Player" parent="." instance=ExtResource("2_iuonh")]
-position = Vector2(150, 152)
+position = Vector2(106, 154)
 
 [node name="test" type="Sprite2D" parent="."]
 position = Vector2(8, 0)

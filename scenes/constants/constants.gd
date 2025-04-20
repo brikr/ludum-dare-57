@@ -6,6 +6,9 @@ const MAX_GEN_DEPTH := 150;
 const MAX_WORLD_WIDTH := 20;
 const TILE_WIDTH := 16
 
+# Player spawn
+const PLAYER_SPAWN := Vector2i()
+
 # World Tiles
 const SOURCE_ID := 0;
 const AIR_TILE := Vector2i(-1, -1)

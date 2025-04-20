@@ -12,3 +12,8 @@ func _process(delta):
     GameState.player.bank_value
   ]
   $CurrentHaulValue.text = CURRENT_HAUL_VALUE_TEMPLATE % GameState.player.haul_value
+
+  if GameState.player.current_fuel <= 0.0:
+    $RespawnHint.visible = true
+  else:
+    $RespawnHint.visible = false
