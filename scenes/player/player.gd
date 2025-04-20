@@ -11,7 +11,7 @@ var initial_position: Vector2
 ## Stats might change from shop items or temporary boosts
 ## Weight
 # how fat u r (in kg)
-var player_weight = 10000.0
+var player_weight = 100.0
 ## Speed and acceleration
 # max horizontal ground speed
 var max_top_speed = 200.0
