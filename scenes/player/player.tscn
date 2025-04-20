@@ -355,3 +355,11 @@ sprite_frames = SubResource("SpriteFrames_fm80t")
 frame = 7
 frame_progress = 0.685338
 centered = false
+
+[node name="JetpackExhaust" type="CPUParticles2D" parent="."]
+emitting = false
+gravity = Vector2(0, 0)
+angular_velocity_max = 334.55
+scale_amount_min = 4.0
+scale_amount_max = 6.0
+color = Color(0.419608, 0.419608, 0.419608, 0.380392)

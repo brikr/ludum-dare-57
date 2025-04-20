@@ -16,11 +16,11 @@ var accel = 30.0
 var air_accel = 5.0
 ## Jumping
 # instantaneous vertical velocity bonus when jumping off the ground at 0kg
-var max_jump_velocity = 400.0
+var max_jump_velocity = 300.0
 # lowest jump velocity can go to if you're overburdened
 var min_jump_velocity = 150.0
 # how much your jump velocity is lowered per kg of weight
-var jump_velocity_penalty = 1.0
+var jump_velocity_penalty = 0.5
 ## Jetpack
 # jetpack vertical acceleration at 0kg
 var max_jetpack_accel = 40.0
@@ -67,9 +67,11 @@ var haul_value = 0.0
 var haul_weight = 0.0
 ## Bank
 # value of sold items
-var bank_value = 1000000.0
+var bank_value = 0.0
 ## Jetpack
 var is_jetpacking = false
+## Used by animations
+var facing_right = true
 
 func _ready():
   $AnimatedSprite2D.play()
@@ -85,7 +87,7 @@ func _process_animation():
   if velocity == Vector2(0, 0):
     # idle
     $AnimatedSprite2D.speed_scale = 1.0
-    if $AnimatedSprite2D.animation.ends_with("right"):
+    if facing_right:
       $AnimatedSprite2D.animation = "idle_right"
     else:
       $AnimatedSprite2D.animation = "idle_left"
@@ -94,10 +96,10 @@ func _process_animation():
     if is_on_floor():
       # ground
       $AnimatedSprite2D.speed_scale = 10.0
-      if Input.get_axis("move_left", "move_right") < 0:
-        $AnimatedSprite2D.animation = "walk_left"
-      else:
+      if facing_right:
         $AnimatedSprite2D.animation = "walk_right"
+      else:
+        $AnimatedSprite2D.animation = "walk_left"
     else:
       # air
       if is_jetpacking:
@@ -106,10 +108,10 @@ func _process_animation():
         # if not jetpacking, just freeze on first frame of air anim
         $AnimatedSprite2D.speed_scale = 0.0
         $AnimatedSprite2D.frame = 0
-      if Input.get_axis("move_left", "move_right") < 0:
-        $AnimatedSprite2D.animation = "air_left"
-      else:
+      if facing_right:
         $AnimatedSprite2D.animation = "air_right"
+      else:
+        $AnimatedSprite2D.animation = "air_left"
 
 
 func _process_movement(delta):
@@ -123,6 +125,7 @@ func _process_movement(delta):
     # Handle floor movement
     var move_direction = Input.get_axis("move_left", "move_right")
     if move_direction:
+      facing_right = move_direction > 0
       velocity.x = move_toward(velocity.x, move_direction * speed, accel)
     else:
       velocity.x = move_toward(velocity.x, 0, accel)
@@ -135,6 +138,7 @@ func _process_movement(delta):
     # Handle air movement
     var move_direction = Input.get_axis("move_left", "move_right")
     if move_direction:
+      facing_right = move_direction > 0
       velocity.x = move_toward(velocity.x, move_direction * speed, air_accel)
     else:
       velocity.x = move_toward(velocity.x, 0, air_accel)
@@ -145,8 +149,10 @@ func _process_movement(delta):
       velocity.y = move_toward(velocity.y, -jetpack_speed_limit, get_jetpack_accel())
       # consume fuel
       current_fuel -= jetpack_fuel_efficiency
+      $JetpackExhaust.emitting = true
     else:
       is_jetpacking = false
+      $JetpackExhaust.emitting = false
 
   move_and_slide()
   clamp_to_world()
