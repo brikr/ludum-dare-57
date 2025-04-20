@@ -5,10 +5,13 @@ signal tile_updated
 
 var player: Player
 var map: Dictionary[Vector2i, Tile] = {}
+var gonster_init_position = Vector2i(0,0)
 
 func _ready():
   gen_map()
 
+####### GAME STATE STATE #######
+var player_has_won = false
 
 ####### WORLD GEN #######
 func is_vertical_edge(y):
@@ -92,6 +95,9 @@ func gen_end_chasm_bubble():
     var center_x = Constants.MAX_WORLD_WIDTH / 2
     var center_y = Constants.MAX_GEN_DEPTH - 2  # 1 tile above bottom
 
+    var center_tile_cords = Vector2i(center_x, center_y)
+    gonster_init_position = center_tile_cords * Constants.TILE_WIDTH
+
     for x in range(center_x - radius, center_x + radius + 1):
         for y in range(center_y - radius, center_y + radius + 1):
             var coords = Vector2i(x, y)
@@ -165,3 +171,7 @@ func dig(coords: Vector2i):
   if map[coords].is_diggable():
     map[coords].clear()
     tile_updated.emit(map[coords])
+
+func has_won():
+  player_has_won = player_has_won || (player.has_gonster && global_position_to_map_coords(player.position).y < Constants.SURFACE_HEIGHT)
+  return player_has_won

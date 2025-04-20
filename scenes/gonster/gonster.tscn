@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://jdg1qikqxfva"]
+
+[ext_resource type="Script" uid="uid://dahfstavekor2" path="res://scenes/gonster/gonster.gd" id="1_wtjgh"]
+[ext_resource type="Texture2D" uid="uid://c2tylwia2akre" path="res://assets/gonster.png" id="1_xrven"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wtjgh"]
+size = Vector2(10, 15)
+
+[node name="Gonster" type="Area2D"]
+collision_layer = 5
+collision_mask = 2
+script = ExtResource("1_wtjgh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(8, 8)
+texture = ExtResource("1_xrven")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8.5)
+shape = SubResource("RectangleShape2D_wtjgh")
+
+[connection signal="body_entered" from="." to="." method="_on_player_touched"]
