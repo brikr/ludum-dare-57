@@ -5,6 +5,7 @@ signal tile_updated
 
 var player: Player
 var map: Dictionary[Vector2i, Tile] = {}
+var gonster_init_position = Vector2i(0,0)
 
 func _ready():
   gen_map()
@@ -91,6 +92,9 @@ func gen_end_chasm_bubble():
     var radius = 5
     var center_x = Constants.MAX_WORLD_WIDTH / 2
     var center_y = Constants.MAX_GEN_DEPTH - 2  # 1 tile above bottom
+
+    var center_tile_cords = Vector2i(center_x, center_y)
+    gonster_init_position = center_tile_cords * Constants.TILE_WIDTH
 
     for x in range(center_x - radius, center_x + radius + 1):
         for y in range(center_y - radius, center_y + radius + 1):
