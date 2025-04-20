@@ -84,6 +84,28 @@ func gen_base_under_world():
             if !is_edge(x, y) and probability > threshold:
                 map[coords] = Tile.Stone(coords)
     )
+    gen_chasms()
+
+func gen_chasms():
+    var noise = GenUtils.get_chasm_noise()
+
+    var noise_func = func(coords: Vector2i) -> float:
+        return (noise.get_noise_2dv(coords) + 1.0) / 2.0
+
+    GenUtils.generate_with_depth_probability(
+        Constants.WORLD_GEN_BASE,
+        Tile.TileType.EMPTY,
+        Constants.SURFACE_HEIGHT,
+        Constants.MAX_GEN_DEPTH,
+        noise_func,
+        func(coords: Vector2i, probability: float) -> void:
+            var x = coords.x
+            var y = coords.y
+            var threshold = Constants.WORLD_GEN_BASE[Tile.TileType.EMPTY][Constants.WORLD_GEN_FIELDS.THRESHOLD]
+
+            if !is_edge(x, y) and probability > threshold:
+                map[coords] = Tile.Empty(coords)
+    )
 
 func gen_out_of_bounds():
   # left
