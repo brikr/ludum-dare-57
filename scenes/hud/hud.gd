@@ -1,10 +1,10 @@
 extends CanvasLayer
 
-const FUEL_WEIGHT_MONEY_TEMPLATE := """Fuel: %.2fL
-Drill Heat: %03dC
-Weight: %dkg
-Money: $%d"""
-const CURRENT_HAUL_VALUE_TEMPLATE := "Current haul: $%d"
+const FUEL_WEIGHT_MONEY_TEMPLATE := """Fuel: [code]%.2fL[/code]
+Drill Heat: [code]%03dC[/code]
+Weight: [code]%dkg[/code]
+Money: [code]$%d[/code]"""
+const CURRENT_HAUL_VALUE_TEMPLATE := "Current haul: [code]$%d[/code]"
 
 # stored on node so we can recolor it based on its value
 var heat_fill_style = get_base_stylebox()
