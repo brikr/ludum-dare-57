@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dbi1s0tx3b5vk"]
+[gd_scene load_steps=9 format=3 uid="uid://dbi1s0tx3b5vk"]
 
 [ext_resource type="Script" uid="uid://bk710nk5wc8ta" path="res://scenes/main/main.gd" id="1_6q06x"]
 [ext_resource type="PackedScene" uid="uid://eduld2nd3eqw" path="res://scenes/player/player.tscn" id="2_iuonh"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c8fpd8kkkwavg" path="res://scenes/shop/shop.tscn" id="4_ow5a4"]
 [ext_resource type="PackedScene" uid="uid://dfowoevuj1o11" path="res://scenes/hud/hud.tscn" id="5_6q06x"]
 [ext_resource type="PackedScene" uid="uid://c8esxak2il3ud" path="res://scenes/gas/gas.tscn" id="5_hujxm"]
+[ext_resource type="AudioStream" uid="uid://c4bnuf0kimucm" path="res://assets/music/loop.ogg" id="8_yyfjg"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_6q06x")
@@ -38,3 +39,9 @@ position = Vector2(106, 154)
 position = Vector2(8, 0)
 
 [node name="HUD" parent="." instance=ExtResource("5_6q06x")]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_yyfjg")
+volume_db = -5.0
+autoplay = true
+parameters/looping = true
