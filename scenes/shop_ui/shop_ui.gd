@@ -14,6 +14,7 @@ func _ready():
     instance.text = ITEM_BUTTON_TEMPLATE % [item.name, item.price]
     instance.item = item
     instance.pressed.connect(item_button_pressed.bind(instance))
+    instance.mouse_entered.connect(item_button_hovered.bind(instance))
     instance.visible = false
     $GearContainer.add_child(instance)
     buttons[item.name] = instance
@@ -38,6 +39,8 @@ func update_button_states():
 
   if items_to_show.is_empty():
     $AllItemsPurchased.visible = true
+    $ItemTooltipBackground.visible = false
+    $ItemTooltip.visible = false
 
 func item_button_pressed(button: ItemButton):
   GameState.purchased_items.append(button.item.name)
@@ -46,3 +49,6 @@ func item_button_pressed(button: ItemButton):
   button.queue_free()
   buttons.erase(button.item.name)
   update_button_states()
+
+func item_button_hovered(button: ItemButton):
+  $ItemTooltip.text = button.item.description
