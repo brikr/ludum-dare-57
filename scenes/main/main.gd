@@ -13,3 +13,6 @@ func place_gonster():
   var gonster_instance = gonster_scene.instantiate()
   gonster_instance.position = GameState.gonster_init_position
   add_child(gonster_instance)
+
+func _on_player_gonster_dropped() -> void:
+  place_gonster()

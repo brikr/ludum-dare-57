@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 class_name Player
 
+signal gonster_dropped
+
 var dropped_haul_scene = preload("res://scenes/dropped_haul/dropped_haul.tscn")
 
 # Used when respawning
@@ -331,19 +333,19 @@ func cease_jetpack():
   $JetpackSound.stop()
 
 func respawn():
+  # reset gonster
+  has_gonster = false
+  emit_signal("gonster_dropped")
   # create haul drop
-  if haul_weight > 0.0 || haul_value > 0.0 || has_gonster:
+  if haul_weight > 0.0 || haul_value > 0.0:
     var haul_instance = dropped_haul_scene.instantiate()
     haul_instance.haul_value = round(haul_value * haul_penalty)
     haul_instance.haul_weight = round(haul_weight * haul_penalty)
-    haul_instance.haul_has_gonster = has_gonster
     haul_instance.position = position
-    print(haul_instance.haul_has_gonster)
     add_sibling(haul_instance)
     # clear ur haul
     haul_weight = 0.0
     haul_value = 0.0
-    has_gonster = false
   # tp to start and refuel
   position = initial_position
   velocity = Vector2.ZERO
