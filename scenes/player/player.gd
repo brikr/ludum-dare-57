@@ -202,6 +202,8 @@ func _process_digging(delta: float):
 
     # if our current progress exceeds the tile's difficulty, blow it up
     if digging_progress >= current_digging_tile.difficulty():
+      # play sound
+      $BreakSound.play()
       # collect resources
       add_to_haul(current_digging_tile)
       # belete tile
