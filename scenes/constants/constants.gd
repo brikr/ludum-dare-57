@@ -13,9 +13,11 @@ const PLAYER_SPAWN := Vector2i()
 const SOURCE_ID := 0;
 const AIR_TILE := Vector2i(-1, -1)
 const DIRT_TILE := Vector2i(0, 0)
+const STONE_TILE := Vector2i(4, 0)
 const HAZARD_TILE := Vector2i(1, 0)
 const FENCE_TILE := Vector2i(2, 0)
 const EMPTY_DIRT_TILE := Vector2i(0, 1)
+const EMPTY_STONE_TILE := Vector2i(1, 1)
 
 # Object Tiles
 const GOLD_TILE := Vector2i(0, 2)
@@ -28,7 +30,18 @@ const ALIEN_TECH_TILE := Vector2i(1, 3)
 
 # World Gen
 enum WORLD_GEN_FIELDS {MIN_DEPTH, MAX_DEPTH, MIN_COEFFICIENT, MAX_COEFFICIENT, THRESHOLD}
-const WORLD_GEN := {
+
+const WORLD_GEN_BASE := {
+  Tile.TileType.STONE: {
+    WORLD_GEN_FIELDS.MIN_DEPTH : 50,
+    WORLD_GEN_FIELDS.MAX_DEPTH : 150,
+    WORLD_GEN_FIELDS.MIN_COEFFICIENT : 0.5,
+    WORLD_GEN_FIELDS.MAX_COEFFICIENT : 2.0,
+    WORLD_GEN_FIELDS.THRESHOLD: 0.5,
+  }
+}
+
+const WORLD_GEN_RESOURCES := {
   Tile.TileObjectType.GOLD: {
     WORLD_GEN_FIELDS.MIN_DEPTH : 0,
     WORLD_GEN_FIELDS.MAX_DEPTH : 75,
@@ -79,6 +92,7 @@ const TILE_BREAKING_FRAME_COUNT := 8
 # Tile difficulty
 const TILE_DIFFICULTY: Dictionary[Tile.TileType, float] = {
   Tile.TileType.DIRT: 50.0,
+  Tile.TileType.STONE: 100.0,
 }
 
 const OBJECT_DIFFICULTY: Dictionary[Tile.TileObjectType, float] = {

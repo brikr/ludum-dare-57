@@ -21,6 +21,8 @@ func get_tile_set_tile(tile: Tile):
       return Constants.AIR_TILE if tile.is_above_ground() else Constants.EMPTY_DIRT_TILE
     Tile.TileType.DIRT:
       return Constants.DIRT_TILE
+    Tile.TileType.STONE:
+      return Constants.STONE_TILE
     Tile.TileType.BORDER:
       # Above ground: fence
       # Below ground: hazard
