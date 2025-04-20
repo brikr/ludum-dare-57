@@ -52,7 +52,7 @@ var digging_power = 1.0
 var digging_heat_gen = 0.5
 ## Heat
 # total heat value before it impacts digging
-var heat_capacity = 100
+var heat_capacity = 100.0
 var heat_decay_rate = 1.0
 # how much heat is gained per tile depth
 var heat_per_depth = 1.0

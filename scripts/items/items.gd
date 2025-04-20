@@ -17,11 +17,11 @@ var GEAR_REGISTRY = [
   ## Heat
   Item.new(
     "Wood Heat Sink",
-    "[i]\"It ain't much and it doesn't work\"[/i]\nDrill can get up to 250C before overheating.",
+    "[i]\"It ain't much and it doesn't work\"[/i]\nDrill can get up to 150C before overheating.",
     Item.Category.HEAT, 50.0, Item.Type.GEAR, {Item.StatImpact.HEAT_CAPACITY: 50.0}),
   Item.new(
     "Aluminum Heat Sink",
-    "[i]Lightweight. Reliable. Not recommended as a cooking surface.[/i]\nDrill can get up to 300C before overheating, and the drill cools off faster.",
+    "[i]Lightweight. Reliable. Not recommended as a cooking surface.[/i]\nDrill can get up to 250C before overheating, and the drill cools off faster.",
     Item.Category.HEAT, 500.0, Item.Type.GEAR, {Item.StatImpact.HEAT_CAPACITY: 100.0, Item.StatImpact.HEAT_DECAY_RATE: 0.5}),
   Item.new(
     "CryoCooler™",
@@ -52,7 +52,7 @@ var GEAR_REGISTRY = [
   Item.new(
     "Jetpack Turbo Booster",
     "[i]The ceiling will come at you so fast you'd think it was the ground.[/i]\nIncreases top speed of the jetpack.",
-    Item.Category.JETPACK, 5000.0, Item.Type.GEAR, {Item.StatImpact.JETPACK_SPEED_LIMIT: 100.0}),
+    Item.Category.JETPACK, 5000.0, Item.Type.GEAR, {Item.StatImpact.JETPACK_SPEED_LIMIT: 75.0}),
   ## Weight
   Item.new(
     "3025 NBA All Stars Nike Sneakers",
