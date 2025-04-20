@@ -14,6 +14,7 @@ var initial_position: Vector2
 ## Weight
 # how fat u r (in kg)
 var player_weight = 100.0
+var gonster_weight = 100.0
 ## Speed and acceleration
 # max horizontal ground speed
 var max_top_speed = 200.0
@@ -301,7 +302,8 @@ func get_total_heat() -> float:
   return get_ambient_heat() + current_dig_heat
 
 func get_total_weight() -> float:
-  return player_weight + haul_weight + (current_fuel / 1000)
+  var standard_weight = player_weight + haul_weight + (current_fuel / 1000)
+  return gonster_weight + standard_weight if has_gonster else standard_weight
 
 func add_to_haul(tile: Tile):
   haul_weight += current_digging_tile.weight()
