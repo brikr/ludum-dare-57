@@ -1,41 +1,52 @@
 extends CanvasLayer
 
 const FUEL_WEIGHT_MONEY_TEMPLATE := """Fuel: %.2fL
-Weight: %dkg
 Drill Heat: %dC
+Weight: %dkg
 Money: $%d"""
 const CURRENT_HAUL_VALUE_TEMPLATE := "Current haul: $%d"
+
+# stored on node so we can recolor it based on its value
+var heat_fill_style = get_base_stylebox()
+const HEAT_GRADIENT_DATA := {
+  0.0: Color("#639bff"),
+  0.6: Color("#639bff"),
+  0.8: Color("#df7126"),
+  1.0: Color("#ac3232")
+}
+var heat_gradient: Gradient
 
 func _ready() -> void:
   $DepthProgressBar.max_value = Constants.MAX_GEN_DEPTH - Constants.SURFACE_HEIGHT - 1 # border width
 
-  # Background style
+  # Background style fo
   var fuel_bg_style = get_base_stylebox()
   fuel_bg_style.bg_color = Color(0.1, 0.1, 0.1)
   $FuelProgressBar.add_theme_stylebox_override("background", fuel_bg_style)
 
-  # Fill (foreground) style
+  # Fill (foreground) style for fuel
   var fuel_fill_style = get_base_stylebox()
   fuel_fill_style.bg_color = Color(1.0, 0.65, 0.0)
   $FuelProgressBar.add_theme_stylebox_override("fill", fuel_fill_style)
 
-  # Background style for depth
-  var depth_bg_style = get_base_stylebox()
-  depth_bg_style.bg_color = Color(0.05, 0.05, 0.08)
-  $HeatProgressBar.add_theme_stylebox_override("background", depth_bg_style)
+  # Background style for heat
+  var heat_bg_style = get_base_stylebox()
+  heat_bg_style.bg_color = Color(0.1, 0.1, 0.1)
+  $HeatProgressBar.add_theme_stylebox_override("background", heat_bg_style)
 
-  # Fill (foreground) style for depth
-  var depth_fill_style = get_base_stylebox()
-  depth_fill_style.bg_color = Color(0.3, 0.6, 1.0)
-  $HeatProgressBar.add_theme_stylebox_override("fill", depth_fill_style)
+  # Fill (foreground) style for heat
+  heat_fill_style.bg_color = Color(0.3, 0.6, 1.0)
+  $HeatProgressBar.add_theme_stylebox_override("fill", heat_fill_style)
 
-
+  heat_gradient = Gradient.new()
+  heat_gradient.offsets = HEAT_GRADIENT_DATA.keys()
+  heat_gradient.colors = HEAT_GRADIENT_DATA.values()
 
 func _process(delta):
   $Status.text = FUEL_WEIGHT_MONEY_TEMPLATE % [
     GameState.player.current_fuel / 1000,
-    GameState.player.get_total_weight(),
     GameState.player.get_total_heat(),
+    GameState.player.get_total_weight(),
     GameState.player.bank_value
   ]
   $CurrentHaulValue.text = CURRENT_HAUL_VALUE_TEMPLATE % GameState.player.haul_value
@@ -53,6 +64,8 @@ func _process(delta):
 
   $HeatProgressBar.max_value = GameState.player.heat_capacity
   $HeatProgressBar.value = GameState.player.get_total_heat()
+  var heat_weight = GameState.player.get_total_heat() / GameState.player.heat_capacity
+  heat_fill_style.bg_color = heat_gradient.sample(heat_weight)
 
   if GameState.has_won():
     $WinNotice.visible = true
