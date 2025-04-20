@@ -1,10 +1,11 @@
-[gd_scene load_steps=49 format=4 uid="uid://eduld2nd3eqw"]
+[gd_scene load_steps=50 format=4 uid="uid://eduld2nd3eqw"]
 
 [ext_resource type="Script" uid="uid://dpbukbr1m44es" path="res://scenes/player/player.gd" id="1_8afob"]
 [ext_resource type="Texture2D" uid="uid://cwog7sm42684w" path="res://assets/tile_highlight.png" id="2_dovo2"]
 [ext_resource type="Texture2D" uid="uid://clokykimm1apq" path="res://assets/player.png" id="2_lvxji"]
 [ext_resource type="Texture2D" uid="uid://cc2qiohmmy07d" path="res://assets/tile_breaking.png" id="3_gmlin"]
 [ext_resource type="AudioStream" uid="uid://pykxo3bpn268" path="res://assets/sounds/break.ogg" id="5_p47bc"]
+[ext_resource type="AudioStream" uid="uid://m05dcrsxvl3w" path="res://assets/sounds/pickup_haul.wav" id="6_75vfm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_28m0y"]
 atlas = ExtResource("2_lvxji")
@@ -384,14 +385,19 @@ color = Color(0.419608, 0.419608, 0.419608, 0.380392)
 
 [node name="JetPackSound" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamOggVorbis_lvxji")
+volume_db = -10.0
 pitch_scale = 2.86
 
 [node name="DiggingSound" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamOggVorbis_p47bc")
-volume_db = -25.0
+volume_db = -30.0
 pitch_scale = 0.4
 parameters/looping = false
 
 [node name="BreakSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_p47bc")
+volume_db = -10.0
+
+[node name="PickupSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_75vfm")
 volume_db = -10.0
