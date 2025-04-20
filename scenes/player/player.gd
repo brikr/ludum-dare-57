@@ -60,7 +60,9 @@ var haul_value = 0.0
 var haul_weight = 0.0
 ## Bank
 # value of sold items
-var bank_value = 0.0
+var bank_value = 1000.0
+## Jetpack
+var is_jetpacking = false
 
 func _ready():
   $AnimatedSprite2D.play()
@@ -69,22 +71,38 @@ func _ready():
 func _physics_process(delta):
   _process_movement(delta)
   _process_digging(delta)
+  _process_animation()
 
-func _animate_on_ground(velocity: Vector2):
+func _process_animation():
   if velocity == Vector2(0, 0):
-    $AnimatedSprite2D.speed_scale = 1.0
     # idle
+    $AnimatedSprite2D.speed_scale = 1.0
     if $AnimatedSprite2D.animation.ends_with("right"):
       $AnimatedSprite2D.animation = "idle_right"
     else:
       $AnimatedSprite2D.animation = "idle_left"
-
   else:
-    $AnimatedSprite2D.speed_scale = 10.0
-    if velocity.x < 0:
-      $AnimatedSprite2D.animation = "walk_left"
+    # movin
+    if is_on_floor():
+      # ground
+      $AnimatedSprite2D.speed_scale = 10.0
+      if Input.get_axis("move_left", "move_right") < 0:
+        $AnimatedSprite2D.animation = "walk_left"
+      else:
+        $AnimatedSprite2D.animation = "walk_right"
     else:
-      $AnimatedSprite2D.animation = "walk_right"
+      # air
+      if is_jetpacking:
+        $AnimatedSprite2D.speed_scale = 2.0
+      else:
+        # if not jetpacking, just freeze on first frame of air anim
+        $AnimatedSprite2D.speed_scale = 0.0
+        $AnimatedSprite2D.frame = 0
+      if Input.get_axis("move_left", "move_right") < 0:
+        $AnimatedSprite2D.animation = "air_left"
+      else:
+        $AnimatedSprite2D.animation = "air_right"
+
 
 func _process_movement(delta):
   if is_on_floor():
@@ -100,8 +118,6 @@ func _process_movement(delta):
       velocity.x = move_toward(velocity.x, move_direction * speed, accel)
     else:
       velocity.x = move_toward(velocity.x, 0, accel)
-
-    _animate_on_ground(velocity)
   else:
     # Air stuff
     # Apply gravity
@@ -116,10 +132,13 @@ func _process_movement(delta):
       velocity.x = move_toward(velocity.x, 0, air_accel)
 
     if Input.is_action_pressed("jump") && $JetpackDelay.is_stopped() && current_fuel > 0:
+      is_jetpacking = true
       # jetpack go brrr
       velocity.y = move_toward(velocity.y, -jetpack_speed_limit, get_jetpack_accel())
       # consume fuel
       current_fuel -= jetpack_fuel_efficiency
+    else:
+      is_jetpacking = false
 
   move_and_slide()
   clamp_to_world()
