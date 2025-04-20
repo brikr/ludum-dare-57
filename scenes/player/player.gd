@@ -60,7 +60,7 @@ var haul_value = 0.0
 var haul_weight = 0.0
 ## Bank
 # value of sold items
-var bank_value = 1000.0
+var bank_value = 0.0
 ## Jetpack
 var is_jetpacking = false
 
@@ -137,8 +137,10 @@ func _process_movement(delta):
       velocity.y = move_toward(velocity.y, -jetpack_speed_limit, get_jetpack_accel())
       # consume fuel
       current_fuel -= jetpack_fuel_efficiency
+      $JetpackExhaust.emitting = true
     else:
       is_jetpacking = false
+      $JetpackExhaust.emitting = false
 
   move_and_slide()
   clamp_to_world()

@@ -69,7 +69,7 @@ interact={
 
 2d_physics/layer_1="world"
 2d_physics/layer_2="player"
-2d_physics/layer_3="shop_interact"
+2d_physics/layer_3="interact"
 
 [rendering]
 
