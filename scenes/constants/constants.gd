@@ -127,6 +127,6 @@ const OBJECT_VALUE: Dictionary[Tile.TileObjectType, float] = {
   Tile.TileObjectType.BLUE: 40.0,
   Tile.TileObjectType.RED: 160.0,
   Tile.TileObjectType.GREEN: 640.0,
-  Tile.TileObjectType.ALIEN_SKULL: 1000.0,
-  Tile.TileObjectType.ALIEN_TECH: 2000.0,
+  Tile.TileObjectType.ALIEN_SKULL: 5000.0,
+  Tile.TileObjectType.ALIEN_TECH: 10000.0,
 }
