@@ -58,3 +58,19 @@ rotation = 1.5708
 theme = ExtResource("1_48c2t")
 value = 50.0
 show_percentage = false
+
+[node name="HeatProgressBar" type="ProgressBar" parent="."]
+offset_left = 138.0
+offset_top = 26.0
+offset_right = 263.0
+offset_bottom = 53.0
+value = 50.0
+show_percentage = false
+
+[node name="FuelProgressBar" type="ProgressBar" parent="."]
+offset_left = 137.0
+offset_top = 73.0
+offset_right = 260.0
+offset_bottom = 100.0
+value = 50.0
+show_percentage = false
