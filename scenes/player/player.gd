@@ -117,13 +117,13 @@ func _process_animation():
       # air
       if is_jetpacking:
         $AnimatedSprite2D.speed_scale = 2.0
-        if !$JetPackSound.playing:
-          $JetPackSound.play()
+        if !$JetpackSound.playing:
+          $JetpackSound.play()
       else:
         # if not jetpacking, just freeze on first frame of air anim
         $AnimatedSprite2D.speed_scale = 0.0
         $AnimatedSprite2D.frame = 0
-        $JetPackSound.stop()
+        $JetpackSound.stop()
       if facing_right:
         $AnimatedSprite2D.animation = "air_right"
       else:
@@ -133,7 +133,7 @@ func _process_animation():
 func _process_movement(delta):
   if is_on_floor():
     # Ground stuff
-    is_jetpacking = false
+    cease_jetpack()
     # Handle jump
     if Input.is_action_just_pressed("jump"):
       velocity.y = get_jump_velocity() * -1
@@ -262,7 +262,7 @@ func angle_to_tile_offset(angle: float) -> Vector2i:
   # Each sector is 45 degrees (π/4 radians)
   var sector = int(round(angle / (PI / 4))) % 8
 
-  # Map the sector index to a direction vector
+  # Map the sector index to a djetpackirection vector
   var direction_vectors = [
       Vector2i(1, 0),    # 0 → Right
       Vector2i(1, 1),    # 1 → Down-Right
@@ -316,6 +316,11 @@ func sell_haul():
   bank_value += haul_value
   haul_value = 0.0
   haul_weight = 0.0
+
+func cease_jetpack():
+  is_jetpacking = false
+  $JetpackExhaust.emitting = false
+  $JetpackSound.stop()
 
 func respawn():
   # create haul drop
