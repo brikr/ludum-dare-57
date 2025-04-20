@@ -45,6 +45,8 @@ texture = ExtResource("1_8y8ej")
 4:6/0 = 0
 5:5/0 = 0
 5:6/0 = 0
+2:2/0 = 0
+3:2/0 = 0
 
 [resource]
 physics_layer_0/collision_layer = 1

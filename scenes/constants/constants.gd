@@ -17,8 +17,8 @@ const EMPTY_DIRT_TILE := Vector2i(0, 1)
 # Object Tiles
 const GOLD_TILE := Vector2i(0, 2)
 const BLUE_TILE := Vector2i(1, 2)
-const RED_TILE := Vector2i(1, 2) # TODO update me
-const GREEN_TILE := Vector2i(1, 2) # TODO update me
+const RED_TILE := Vector2i(2, 2)
+const GREEN_TILE := Vector2i(3, 2)
 const ALIEN_SKULL_TILE := Vector2i(0, 3)
 const ALIEN_TECH_TILE := Vector2i(1, 3)
 
