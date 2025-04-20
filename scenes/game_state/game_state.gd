@@ -6,6 +6,7 @@ signal tile_updated
 var player: Player
 var map: Dictionary[Vector2i, Tile] = {}
 var gonster_init_position = Vector2i(0,0)
+var purchased_items: Array[String] = []
 
 func _ready():
   gen_map()

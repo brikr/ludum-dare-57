@@ -15,17 +15,20 @@ enum StatImpact {
   HEAT_CAPACITY,
   HEAT_DECAY_RATE,
 }
+enum Category {DRILL, JETPACK, FUEL, HEAT, WEIGHT}
 
 var type: Type
 var statImpact: Dictionary[StatImpact, float]
 var name: String
 var price: float
+var category: Category
 
-func _init(name: String, price: float, type: Type, statImpact: Dictionary[StatImpact, float]) -> void:
+func _init(name: String, category: Category, price: float, type: Type, statImpact: Dictionary[StatImpact, float]) -> void:
   self.type = type
   self.statImpact = statImpact
   self.name = name
   self.price = price
+  self.category = category
 
 func apply() -> void:
   for key in statImpact:
@@ -35,6 +38,7 @@ func apply() -> void:
         GameState.player.player_weight += val
       Item.StatImpact.FUEL_CAPACITY:
         GameState.player.fuel_capacity += val
+        GameState.player.refuel()
       Item.StatImpact.MAX_JETPACK_ACCEL:
         GameState.player.max_jetpack_accel += val
       Item.StatImpact.MIN_JETPACK_ACCEL:
