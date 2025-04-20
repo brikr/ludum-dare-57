@@ -18,4 +18,3 @@ func place_gonster():
   gonster_instance.position = GameState.gonster_init_position
   gonster_instance.position = Vector2i(150, 150)
   add_child(gonster_instance)
-  print("gonster pos ", GameState.gonster_init_position)
