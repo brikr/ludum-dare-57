@@ -4,11 +4,8 @@ var item_button_scene = preload("res://scenes/shop_ui/item_button.tscn")
 
 const ITEM_BUTTON_TEMPLATE = "%s ($%d)"
 
-var buttons: Array[Button]
-# TODO
-# - disable items u cant afford
-# - take money when buying
-# - remove button after buying
+# item name -> button for buying item
+var buttons: Dictionary[String, Button]
 
 func _ready():
   for item in Items.GEAR_REGISTRY:
@@ -17,13 +14,14 @@ func _ready():
     instance.item = item
     instance.pressed.connect(item_button_pressed.bind(instance))
     $GearContainer.add_child(instance)
-    buttons.append(instance)
+    buttons[item.name] = instance
 
 func update_button_states():
-  for button in buttons:
-    button.disabled = GameState.player.bank_value < button.item.price
+  for itemName in buttons:
+    buttons[itemName].disabled = GameState.player.bank_value < buttons[itemName].item.price
 
 func item_button_pressed(button: ItemButton):
   GameState.player.bank_value -= button.item.price
   button.item.apply()
   button.queue_free()
+  buttons.erase(button.item.name)
