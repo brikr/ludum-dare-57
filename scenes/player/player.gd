@@ -274,7 +274,9 @@ func get_jetpack_accel() -> float:
   return max(max_jetpack_accel - get_total_weight() * jetpack_accel_penalty, min_jetpack_accel)
 
 func refuel():
-  current_fuel = fuel_capacity
+  if current_fuel < fuel_capacity:
+    $RefuelSound.play()
+    current_fuel = fuel_capacity
 
 func sell_haul():
   bank_value += haul_value
