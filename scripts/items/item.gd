@@ -2,6 +2,7 @@ class_name Item extends Object
 
 enum Type {GEAR, CONSUMABLE}
 enum StatImpact {
+  PLAYER_WEIGHT,
   FUEL_CAPACITY,
   MAX_JETPACK_ACCEL,
   MIN_JETPACK_ACCEL,
@@ -30,6 +31,8 @@ func apply() -> void:
   for key in statImpact:
     var val = statImpact[key]
     match key:
+      Item.StatImpact.PLAYER_WEIGHT:
+        GameState.player.player_weight += val
       Item.StatImpact.FUEL_CAPACITY:
         GameState.player.fuel_capacity += val
       Item.StatImpact.MAX_JETPACK_ACCEL:
