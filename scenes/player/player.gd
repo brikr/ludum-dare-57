@@ -104,10 +104,13 @@ func _process_animation():
       # air
       if is_jetpacking:
         $AnimatedSprite2D.speed_scale = 2.0
+        if !$JetPackSound.playing:
+          $JetPackSound.play()
       else:
         # if not jetpacking, just freeze on first frame of air anim
         $AnimatedSprite2D.speed_scale = 0.0
         $AnimatedSprite2D.frame = 0
+        $JetPackSound.stop()
       if facing_right:
         $AnimatedSprite2D.animation = "air_right"
       else:
@@ -117,6 +120,7 @@ func _process_animation():
 func _process_movement(delta):
   if is_on_floor():
     # Ground stuff
+    is_jetpacking = false
     # Handle jump
     if Input.is_action_just_pressed("jump"):
       velocity.y = get_jump_velocity() * -1
@@ -176,6 +180,8 @@ func _process_digging(delta: float):
       return
 
     is_digging = true
+    if !$DiggingSound.playing:
+      $DiggingSound.play()
     $HighlightedTile/TileBreaking.visible = true
     # if we're digging a different tile than before, reset progress
     if new_digging_tile != current_digging_tile:
@@ -202,6 +208,7 @@ func _process_digging(delta: float):
 
 func clear_digging_state():
   $HighlightedTile/TileBreaking.visible = false
+  $DiggingSound.stop()
   is_digging = false
   current_digging_tile = null
   digging_progress = 0.0
