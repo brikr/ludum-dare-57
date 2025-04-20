@@ -191,6 +191,10 @@ func _process_heat(delta: float):
 func _process_digging(delta: float):
   var can_dig = get_total_heat() < heat_capacity
 
+  # if you're not already digging, you can't start digging if drill is close to overheating
+  if !is_digging && get_total_heat() / heat_capacity > 0.9:
+    can_dig = false
+
   if Input.is_action_pressed("primary_mouse_action") && can_dig:
     var new_digging_tile = get_targeted_tile()
     if !new_digging_tile.is_diggable():
