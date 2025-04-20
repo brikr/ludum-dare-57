@@ -59,6 +59,8 @@ var heat_decay_rate = 1.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 # max fall speed
 var terminal_velocity = 350.0
+## Haul
+var haul_penalty = 0.5
 
 ###### STATE ######
 ## State changes constantly as you are performing actions
@@ -328,8 +330,8 @@ func respawn():
   # create haul drop
   if haul_weight > 0.0 || haul_value > 0.0 || has_gonster:
     var haul_instance = dropped_haul_scene.instantiate()
-    haul_instance.haul_value = haul_value
-    haul_instance.haul_weight = haul_weight
+    haul_instance.haul_value = round(haul_value * haul_penalty)
+    haul_instance.haul_weight = round(haul_weight * haul_penalty)
     haul_instance.haul_has_gonster = has_gonster
     haul_instance.position = position
     print(haul_instance.haul_has_gonster)
