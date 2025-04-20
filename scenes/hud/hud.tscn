@@ -34,7 +34,7 @@ offset_bottom = 1080.0
 theme = ExtResource("1_48c2t")
 theme_override_font_sizes/font_size = 32
 text = "Press K to respawn
-Your haul will be left here"
+Your half your haul will be left here, the other half will be lost"
 horizontal_alignment = 1
 vertical_alignment = 1
 
