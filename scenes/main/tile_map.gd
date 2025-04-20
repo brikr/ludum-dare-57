@@ -34,6 +34,10 @@ func get_tile_set_object(tile: Tile):
       return Constants.GOLD_TILE
     Tile.TileObjectType.BLUE:
       return Constants.BLUE_TILE
+    Tile.TileObjectType.RED:
+      return Constants.RED_TILE
+    Tile.TileObjectType.GREEN:
+      return Constants.GREEN_TILE
     Tile.TileObjectType.ALIEN_SKULL:
       return Constants.ALIEN_SKULL_TILE
     Tile.TileObjectType.ALIEN_TECH:

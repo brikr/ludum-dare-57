@@ -1,7 +1,7 @@
 class_name Tile extends Object
 
 enum TileType {EMPTY, DIRT, BORDER}
-enum TileObjectType {NONE, GOLD, BLUE, ALIEN_SKULL, ALIEN_TECH}
+enum TileObjectType {NONE, GOLD, BLUE, RED, GREEN, ALIEN_SKULL, ALIEN_TECH}
 
 var coords: Vector2i
 var type: TileType

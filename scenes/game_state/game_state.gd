@@ -25,6 +25,8 @@ func gen_under_world():
 
   gen_resource(Tile.TileObjectType.ALIEN_SKULL, false)
   gen_resource(Tile.TileObjectType.ALIEN_TECH, false)
+  gen_resource(Tile.TileObjectType.GREEN)
+  gen_resource(Tile.TileObjectType.RED)
   gen_resource(Tile.TileObjectType.BLUE)
   gen_resource(Tile.TileObjectType.GOLD)
 
