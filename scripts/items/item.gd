@@ -42,7 +42,7 @@ func apply() -> void:
       Item.StatImpact.JETPACK_ACCEL_PENALTY:
         GameState.player.jetpack_accel_penalty += val
       Item.StatImpact.JETPACK_SPEED_LIMIT:
-        GameState.player.jetpack_speed_limit += val
+        GameState.player.max_jetpack_top_speed += val
       Item.StatImpact.JETPACK_FUEL_EFFICIENCY:
         GameState.player.jetpack_fuel_efficiency += val
       Item.StatImpact.CURRENT_FUEL:
