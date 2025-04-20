@@ -20,13 +20,15 @@ enum Category {DRILL, JETPACK, FUEL, HEAT, WEIGHT}
 var type: Type
 var statImpact: Dictionary[StatImpact, float]
 var name: String
+var description: String
 var price: float
 var category: Category
 
-func _init(name: String, category: Category, price: float, type: Type, statImpact: Dictionary[StatImpact, float]) -> void:
+func _init(name: String, description: String, category: Category, price: float, type: Type, statImpact: Dictionary[StatImpact, float]) -> void:
   self.type = type
   self.statImpact = statImpact
   self.name = name
+  self.description = description
   self.price = price
   self.category = category
 

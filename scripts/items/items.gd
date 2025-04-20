@@ -2,7 +2,10 @@ extends Node
 
 var GEAR_REGISTRY = [
   ## Drill
-  Item.new("Titanium Drill", Item.Category.DRILL, 100.0, Item.Type.GEAR, {Item.StatImpact.DIGGING_POWER: 0.5}),
+  Item.new(
+    "Titanium Drill",
+    "Stronger than the standard issue. Digs 50% faster.",
+    Item.Category.DRILL, 100.0, Item.Type.GEAR, {Item.StatImpact.DIGGING_POWER: 0.5}),
   Item.new("Overdrive Rotor", Item.Category.DRILL, 1000.0, Item.Type.GEAR, {Item.StatImpact.DIGGING_POWER: 0.5}),
   Item.new("Worldbreaker Bit", Item.Category.DRILL, 5000.0, Item.Type.GEAR, {Item.StatImpact.DIGGING_POWER: 1.0}),
   ## Heat

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://837encs13ggh"]
+[gd_scene load_steps=4 format=3 uid="uid://837encs13ggh"]
 
 [ext_resource type="Script" uid="uid://mb61cud1laj6" path="res://scenes/shop_ui/shop_ui.gd" id="1_67u7h"]
 [ext_resource type="Theme" uid="uid://dmwt5ilifg3r8" path="res://assets/ui_theme.tres" id="2_u3gf3"]
+[ext_resource type="PackedScene" uid="uid://cvhcwsah45gpm" path="res://scenes/shop_ui/item_button.tscn" id="3_uaovo"]
 
 [node name="ShopUI" type="CanvasLayer"]
 script = ExtResource("1_67u7h")
@@ -22,6 +23,26 @@ offset_right = 705.0
 offset_bottom = 1021.0
 theme = ExtResource("2_u3gf3")
 
+[node name="ItemButton" parent="GearContainer" instance=ExtResource("3_uaovo")]
+visible = false
+layout_mode = 2
+
+[node name="ItemButton2" parent="GearContainer" instance=ExtResource("3_uaovo")]
+visible = false
+layout_mode = 2
+
+[node name="ItemButton3" parent="GearContainer" instance=ExtResource("3_uaovo")]
+visible = false
+layout_mode = 2
+
+[node name="ItemButton4" parent="GearContainer" instance=ExtResource("3_uaovo")]
+visible = false
+layout_mode = 2
+
+[node name="ItemButton5" parent="GearContainer" instance=ExtResource("3_uaovo")]
+visible = false
+layout_mode = 2
+
 [node name="AllItemsPurchased" type="Label" parent="."]
 visible = false
 offset_top = 417.0
@@ -30,3 +51,19 @@ offset_bottom = 440.0
 theme_override_font_sizes/font_size = 32
 text = "All items purchased!"
 horizontal_alignment = 1
+
+[node name="ItemTooltipContainer" type="Panel" parent="."]
+offset_left = 15.0
+offset_top = 581.0
+offset_right = 705.0
+offset_bottom = 661.0
+size_flags_vertical = 0
+
+[node name="ItemTooltip" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 585.0
+offset_right = 696.0
+offset_bottom = 619.0
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 24
+text = "Makes ur pp yuuuuge"
