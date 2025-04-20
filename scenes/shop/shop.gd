@@ -11,6 +11,7 @@ func _process(delta):
     GameState.player.refuel()
     GameState.player.sell_haul()
     $ShopUI.visible = true
+    $ShopUI.update_button_states()
 
 func _on_player_entered(body: Node2D) -> void:
   player_present = true
