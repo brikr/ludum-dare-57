@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://dmwt5ilifg3r8" path="res://assets/ui_theme.tres" id="1_48c2t"]
 [ext_resource type="Script" uid="uid://c57mj3ygc5bdo" path="res://scenes/hud/hud.gd" id="1_cgeww"]
-[ext_resource type="SystemFont" uid="uid://cl2suc7tuuam4" path="res://scenes/hud/status_font.tres" id="2_c45xl"]
+[ext_resource type="FontFile" uid="uid://dv6i58c4vidce" path="res://assets/fonts/NotoSansMono-SemiBold.ttf" id="3_0bx4p"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_cgeww")
@@ -14,7 +14,7 @@ offset_right = 705.0
 offset_bottom = 207.0
 theme = ExtResource("1_48c2t")
 theme_override_constants/outline_size = 5
-theme_override_fonts/mono_font = ExtResource("2_c45xl")
+theme_override_fonts/mono_font = ExtResource("3_0bx4p")
 theme_override_font_sizes/mono_font_size = 36
 theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
@@ -31,7 +31,7 @@ offset_right = 704.0
 offset_bottom = 238.0
 theme = ExtResource("1_48c2t")
 theme_override_constants/outline_size = 5
-theme_override_fonts/mono_font = ExtResource("2_c45xl")
+theme_override_fonts/mono_font = ExtResource("3_0bx4p")
 theme_override_font_sizes/mono_font_size = 24
 theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
